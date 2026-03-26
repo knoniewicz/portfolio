@@ -1,0 +1,11 @@
+---
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+---
+<ul class="list-none p-0 space-y-0">
+  {items.map((item, i) => (
+    <li class:list={["text-text-secondary py-1.5 text-[0.9375rem]", i < items.length - 1 && "border-b border-border-subtle"]}>{item}</li>
+  ))}
+</ul>

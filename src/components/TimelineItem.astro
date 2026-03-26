@@ -1,0 +1,17 @@
+---
+interface Props {
+  date: string;
+  title: string;
+  org: string;
+  last?: boolean;
+}
+const { date, title, org, last = false } = Astro.props;
+---
+<div class:list={["grid grid-cols-[160px_1fr] max-md:grid-cols-1 gap-10 max-md:gap-1 py-6", !last && "border-b border-border-subtle"]}>
+  <span class="font-mono text-xs text-text-muted pt-0.5">{date}</span>
+  <div>
+    <h3 class="text-base font-semibold tracking-tight mb-0.5">{title}</h3>
+    <p class="text-sm text-text-secondary mb-2">{org}</p>
+    <p class="text-[0.9375rem] text-text-secondary"><slot /></p>
+  </div>
+</div>

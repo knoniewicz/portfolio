@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../../components/ProjectPageHeader.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
+import TagList from '../../components/TagList.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<Base title="Futura / Kacper Noniewicz" description="ML pipeline for next-day stock trend prediction. Diploma project.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader label="Earlier work / Diploma project" title="Futura" intro="My diploma project at HTBLA Grieskirchen. A team project where I owned the entire ML pipeline, from raw market data to trained model to database output." />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectProse>
+          <p>Takes historical stock data, engineers features from it, trains a classifier to predict next-day price direction, and writes results to MongoDB for the rest of the team's app.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Why I built it">
+        <ProjectProse>
+          <p>Can you take historical stock data, engineer enough useful features from it, and train a model that predicts whether the price goes up or down the next day? Not a production trading system. A structured exercise in building an end-to-end ML workflow that actually runs.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="How it works">
+        <CodeBlock>Raw OHLCV data
+  → ~100 technical indicators (TA-Lib)
+  → Lag + date features
+  → RFE feature selection (60 features)
+  → LightGBM classifier (GPU)
+  → Evaluation
+  → MongoDB writeback</CodeBlock>
+        <ProjectProse>
+          <p>I pulled OHLCV data from Yahoo Finance, generated around 100 technical indicators with TA-Lib across multiple time horizons, added lag features and date signals, then used Recursive Feature Elimination to cut the noise down to 60 usable features.</p>
+          <p>The model was a LightGBM classifier trained on GPU, with hyperparameter search via GridSearchCV. Results got written back to MongoDB so the rest of the team's app could consume predictions. The whole thing ran as a Jupyter pipeline. Messy in places, honest about what it was.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Python 3.10", "Jupyter", "pandas", "TA-Lib", "LightGBM (CUDA)", "scikit-learn", "yfinance", "MongoDB"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>Archived educational work. The value is in demonstrating end-to-end ML workflow execution, not in claiming trading performance.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>

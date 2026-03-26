@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "Software Developer | Industrial Software, AI Infrastructure, Event-Driven Systems", description = "Software Developer. Go, TypeScript, Python." } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl.toString()} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl.toString()} />
+    <meta property="og:image" content={socialImageUrl.toString()} />
+    <meta property="og:site_name" content="Kacper Noniewicz" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl.toString()} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script is:inline>
+      const stored = localStorage.getItem('theme');
+      const sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', stored || sys);
+    </script>
+  </head>
+  <body class="leading-relaxed">
+    <header class="sticky top-0 z-50 bg-bg border-b border-(--color-border)">
+      <div class="max-w-275 mx-auto px-8 py-3.5 flex items-center justify-between">
+        <a href="/" class="font-mono text-[0.8125rem] font-medium uppercase tracking-[0.08em]">Kacper Noniewicz</a>
+        <div class="flex items-center gap-8">
+          <nav class="hidden md:flex gap-6">
+            <a href="/#about" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">About</a>
+            <a href="/#projects" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Projects</a>
+            <a href="/#experience" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Experience</a>
+            <a href="/#contact" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Contact</a>
+          </nav>
+          <button class="border-2 border-border-subtle w-8 h-8 grid place-items-center text-text-muted text-sm cursor-pointer hover:border-(--color-border) hover:text-(--color-text) transition-colors bg-transparent" id="theme-toggle" aria-label="Toggle theme">&#9684;</button>
+        </div>
+      </div>
+    </header>
+    <div class="max-w-275 mx-auto px-8 max-md:px-5">
+      <slot />
+    </div>
+    <footer class="border-t border-(--color-border) py-6">
+      <div class="max-w-275 mx-auto px-8 max-md:px-5 font-mono text-[0.6875rem] tracking-[0.04em] uppercase text-text-muted">
+        <span>&copy; {new Date().getFullYear()} Kacper Noniewicz</span>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      toggle?.addEventListener('click', () => {
+        const next = (html.getAttribute('data-theme') || 'light') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    </script>
+  </body>
+</html>

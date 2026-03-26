@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../../components/ProjectPageHeader.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
+import TagList from '../../components/TagList.astro';
+---
+
+<Base title="Anima / Kacper Noniewicz" description="Private self-hosted system of services for personal infrastructure.">
+  <div class="py-16 pb-20">
+      <ProjectPageHeader
+        label="Private / Self-hosted"
+        title="Anima"
+        intro="A private, event-driven platform for my personal infrastructure. Fully self-hosted, with no cloud dependency. Korpus and Pularis started here and were later extracted into standalone open-source projects."
+      />
+
+      <div class="max-w-180">
+        <ProjectSection title="What it does">
+          <ProjectList
+            items={[
+              "Ingests events from external APIs, devices, and local integrations",
+              "Validates and persists data through a single canonical write boundary (Korpus)",
+              "Discovers and proxies extension tools over MCP",
+              "Runs modular extensions with clearly separated responsibilities",
+              "Operates fully self-hosted through Docker Compose",
+            ]}
+          />
+        </ProjectSection>
+
+        <ProjectSection title="Why I built it">
+          <ProjectProse>
+            <p>
+              I wanted a system that remembers, automates, and stays under my control.
+              No cloud dependency, no telemetry, and no vendor lock-in. Anima is the
+              umbrella that ties together the infrastructure, memory, automation, and
+              agent tooling I build for my own use. Korpus and Pularis started here
+              and were later extracted as standalone open-source projects.
+            </p>
+          </ProjectProse>
+        </ProjectSection>
+
+        <ProjectSection title="How it works">
+          <ProjectProse>
+            <p>
+              Services publish structured events to Redis. Korpus validates them
+              against JSON Schemas and writes the canonical record to Postgres. The
+              extension layer discovers tools on disk, loads them, and proxies them
+              as MCP endpoints. The system is event-driven, schema-first, and designed
+              around explicit boundaries between components.
+            </p>
+          </ProjectProse>
+        </ProjectSection>
+
+        <ProjectSection title="Stack">
+          <TagList
+            tags={[
+              "Go",
+              "Python",
+              "Rust",
+              "Postgres",
+              "Redis",
+              "Qdrant",
+              "Docker Compose",
+              "MCP",
+            ]}
+          />
+        </ProjectSection>
+
+        <ProjectSection title="Status">
+          <ProjectProse>
+            <p>Private. Actively developed.</p>
+          </ProjectProse>
+        </ProjectSection>
+      </div>
+    </div>
+  </div>
+</Base>

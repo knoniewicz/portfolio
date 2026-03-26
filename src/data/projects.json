@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "korpus",
+    "name": "Korpus",
+    "state": "Public",
+    "featured": true,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/korpus",
+    "summary": "Go service that owns the canonical write path. Validates events against JSON Schemas, persists to Postgres, handles FK-aware retries.",
+    "labels": ["Go", "Postgres", "Redis", "JSON Schema"],
+    "signal": "Single write boundary with explicit contracts."
+  },
+  {
+    "slug": "pularis",
+    "name": "Pularis",
+    "state": "Public",
+    "featured": true,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/pularis",
+    "summary": "Stateless Go polling adapter. Config-driven HTTP fetcher that transforms API responses into Redis events. No persistence inside.",
+    "labels": ["Go", "Redis", "TOML", "MIT"],
+    "signal": "Fetch, transform, emit. Stateless by design."
+  },
+  {
+    "slug": "futura",
+    "name": "Futura",
+    "state": "Earlier work",
+    "featured": true,
+    "url": null,
+    "repo": null,
+    "summary": "Diploma project. My scope was the ML pipeline: Python/Jupyter with TA-Lib indicators, RFE feature selection, LightGBM classifier for next-day stock trends, MongoDB writeback.",
+    "labels": ["Python", "Jupyter", "LightGBM", "Educational"],
+    "signal": "ML workflow execution, not a trading system claim."
+  }
+]

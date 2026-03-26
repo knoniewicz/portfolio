@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../../components/ProjectPageHeader.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
+import TagList from '../../components/TagList.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<Base title="Pularis / Kacper Noniewicz" description="Stateless Go polling adapter for HTTP APIs.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader label="Public / Go / MIT" title="Pularis" intro="A small Go service that polls HTTP APIs on a schedule, transforms the responses into structured events, and publishes them to Redis. It owns no storage and no state." repo="https://github.com/knoniewicz/pularis" />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectList items={[
+          "Polls HTTP endpoints at configurable intervals",
+          "Extracts fields from JSON responses using gjson paths",
+          "Conditionally publishes events based on expr rules",
+          "Tracks session transitions automatically (created/ended)",
+          "Emits events to Redis channels for downstream consumers",
+        ]} />
+      </ProjectSection>
+
+      <ProjectSection title="Why I built it">
+        <ProjectProse>
+          <p>I kept writing the same adapter code for every new API I wanted to ingest: polling loop, auth wiring, JSON extraction, event publishing. Pularis turns that into configuration. You write a TOML file describing the source, and Pularis handles the rest.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="How it works">
+        <CodeBlock>name = "example_source"
+endpoint = "https://api.example.com/status"
+poll_interval_seconds = 15
+
+[[events]]
+name = "activity"
+is_session = true
+on_changed_fields = ["state"]
+publish_when = "state != ''"
+
+[events.transform]
+user_id = "data.user.id"
+state = "data.session.state"</CodeBlock>
+        <ProjectProse>
+          <p>Auth credentials live in a companion <code class="font-mono text-sm">.auth.json</code> file next to the TOML config. Header values reference auth keys with placeholders.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Go", "Redis", "gjson", "expr"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>Public and usable. I run it as part of my personal infrastructure to ingest data from several external APIs. MIT licensed.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>

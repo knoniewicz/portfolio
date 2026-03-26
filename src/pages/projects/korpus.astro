@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../../components/ProjectPageHeader.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
+import TagList from '../../components/TagList.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<Base title="Korpus / Kacper Noniewicz" description="Go service for canonical event writes with JSON Schema validation.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader label="Public / Go / AGPL-3.0" title="Korpus" intro="The single write boundary for my event-driven systems. Korpus validates every event against a JSON Schema before it touches the database, then persists the canonical record to Postgres." repo="https://github.com/knoniewicz/korpus" />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectList items={[
+          "Loads schemas from disk, generates tables and prepared statements automatically",
+          "Validates every incoming event before writing anything",
+          "Retries writes when child records arrive before their parents (FK-aware ordering)",
+          "Serves health, schema inspection, and entity query endpoints over HTTP",
+          "Consumes and publishes events through Redis Pub/Sub",
+        ]} />
+      </ProjectSection>
+
+      <ProjectSection title="Why I built it">
+        <ProjectProse>
+          <p>Every service I ran was duplicating the same work: validating payloads, mapping them to tables, handling upserts, retrying when dependencies weren't ready yet. Korpus puts all of that in one place. You define schemas, publish events, and let Korpus deal with the durable write path.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="How it works">
+        <CodeBlock>Producer → Redis Pub/Sub → Korpus → Schema validation → Postgres</CodeBlock>
+        <ProjectProse>
+          <p>Schemas live alongside the services that own them. Korpus discovers them on startup, builds the database layer from the definitions, and keeps contracts explicit. If a payload doesn't match, it gets rejected before anything is written.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Go", "Postgres", "Redis", "JSON Schema"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>I run Korpus in production for my personal infrastructure. It's stable and does what I need. Open-sourced under AGPL-3.0, with a commercial license available for proprietary use.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>

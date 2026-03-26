@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import TimelineItem from '../components/TimelineItem.astro';
+import MonoLink from '../components/MonoLink.astro';
+import projects from '../data/projects.json';
+import TagList from '../components/TagList.astro';
+---
+
+<Base title="Software Developer | Industrial Software, AI Infrastructure, Event-Driven Systems" description="Software developer building industrial software, AI infrastructure, and event-driven systems.">
+
+  <!-- Hero -->
+  <section class="py-20 max-md:py-12 grid grid-cols-[1fr_260px] max-md:grid-cols-1 gap-16 max-md:gap-10 items-center border-b border-(--color-border)">
+    <div>
+      <span class="block font-mono text-[0.6875rem] uppercase tracking-widest text-text-muted mb-5">Software Developer</span>
+      <h1 class="font-mono text-[clamp(2.5rem,6vw,3.5rem)] max-md:text-[2rem] font-medium tracking-tight leading-none mb-7 uppercase">Kacper<br />Noniewicz</h1>
+      <p class="text-[1.0625rem] text-text-secondary max-w-120 leading-relaxed">Industrial automation at work.<br />Personal infrastructure on my own time.</p>
+      <div class="flex gap-6 mt-6 font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">
+        <span>Schauer Agrotronic</span>
+        <span class="relative before:content-['/'] before:absolute before:-left-4 before:text-border-subtle">Austria</span>
+      </div>
+      <div class="flex gap-5 mt-8 pt-6 border-t border-border-subtle flex-wrap">
+        <MonoLink href="https://github.com/knoniewicz" target="_blank" rel="noopener noreferrer">GitHub</MonoLink>
+        <MonoLink href="https://www.linkedin.com/in/noniewicz" target="_blank" rel="noopener noreferrer">LinkedIn</MonoLink>
+        <MonoLink href="mailto:kacper@noniewicz.eu">Email</MonoLink>
+      </div>
+    </div>
+    <div class="max-md:order-first max-md:max-w-45">
+      <img src="/kacper.jpg" alt="Kacper Noniewicz" width="260" height="260" class="w-full aspect-square object-cover grayscale-30 contrast-[1.05] border-2 border-(--color-border)" />
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="py-16 border-t border-(--color-border)" id="about">
+    <SectionLabel text="About" />
+    <div class="max-w-180 space-y-4">
+
+      <p class="text-text-secondary">
+        I build software for industrial systems under real constraints: low-power embedded hardware, device integration over serial interfaces, and touch-first operation.
+      </p>
+      <p class="text-text-secondary">
+        At Schauer Agrotronic, I work across Angular and Node.js, led the migration from a legacy Angular version to the current stack, and focused heavily on application responsiveness.
+      </p>
+      <p class="text-text-secondary">
+        Outside of work, I build self-hosted infrastructure and AI systems in Go and Python. My current AI work is fully self-directed, from architecture to implementation.
+      </p>
+
+      <TagList tags={["Polish", "German", "English"]} />
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="py-16 border-t border-(--color-border)" id="projects">
+    <SectionLabel text="Projects" />
+    <div>
+      {projects.filter(p => p.featured).slice(0, 3).map((project, i) => (
+        <ProjectCard
+          name={project.name}
+          state={project.state}
+          summary={project.summary}
+          labels={project.labels}
+          href={project.url || `/projects/${project.slug}/`}
+          external={!!project.url}
+          first={i === 0}
+        />
+      ))}
+    </div>
+    <a href="/projects/anima/" class="block mt-7 p-5 border-l-[3px] border-(--color-border) bg-bg-subtle no-underline hover:bg-(--color-bg-elevated) transition-colors">
+      <p class="text-sm text-text-secondary"><strong class="text-(--color-text)">Anima</strong> is the private, event-driven system that ties my personal infrastructure together. No cloud dependency. Korpus and Pularis were extracted from here.</p>
+      <span class="inline-block mt-3 font-mono text-xs uppercase tracking-[0.06em] text-text-muted border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">Read more about Anima</span>
+    </a>
+    {projects.length > 3 && (
+      <div class="mt-6">
+        <MonoLink href="/projects/">View all projects</MonoLink>
+      </div>
+    )}
+  </section>
+
+  <!-- Experience -->
+  <section class="py-16 border-t border-(--color-border)" id="experience">
+    <SectionLabel text="Experience" />
+    <div>
+      <TimelineItem date="07/2024 – present" title="Software Developer" org="Schauer Agrotronic, Full-time">
+          Building control software for constrained hardware systems and internal AI tooling. Leading the migration from legacy Angular to the modern stack across the product line. Current AI work is owned end-to-end, from architecture to implementation.
+      </TimelineItem>
+      <TimelineItem date="06/2022 – 06/2024" title="Software Developer" org="Schauer Agrotronic, Part-time">
+          Started part-time alongside school. Built and maintained Angular-based touch interfaces, with a strong focus on responsiveness and usability in real operating environments.
+      </TimelineItem>
+      <TimelineItem date="04/2022" title="Accenture Hackathon Vienna" org="2nd Place" last>
+        2nd place. Built and pitched under time pressure in a team competition.
+      </TimelineItem>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="py-16 border-t border-(--color-border)" id="education">
+    <SectionLabel text="Education" />
+    <div>
+      <TimelineItem date="2019 – 2024" title="HTBLA Grieskirchen" org="Informatik / Computer Sciences (EQF Level 5)" last>
+        Technical diploma with computer sciences specialization. Diploma project: Futura, an ML pipeline for stock trend prediction (my scope: Python/Jupyter, TA-Lib, RFE, LightGBM, MongoDB writeback).
+      </TimelineItem>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="py-16 border-t border-(--color-border)" id="contact">
+    <SectionLabel text="Contact" />
+    <div class="max-w-180">
+      <p class="text-text-secondary">Reach out for work, questions about my projects, or just to talk shop.</p>
+    </div>
+    <div class="flex flex-col gap-2 mt-6">
+      <a href="mailto:kacper@noniewicz.eu" class="font-mono text-sm text-text-secondary w-fit border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">kacper@noniewicz.eu</a>
+      <a href="https://github.com/knoniewicz" target="_blank" rel="noopener noreferrer" class="font-mono text-sm text-text-secondary w-fit border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">github.com/knoniewicz</a>
+      <a href="https://www.linkedin.com/in/noniewicz" target="_blank" rel="noopener noreferrer" class="font-mono text-sm text-text-secondary w-fit border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">linkedin.com/in/noniewicz</a>
+    </div>
+  </section>
+
+</Base>

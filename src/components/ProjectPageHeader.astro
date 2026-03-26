@@ -1,0 +1,19 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  intro: string;
+  repo?: string | null;
+}
+const { label, title, intro, repo } = Astro.props;
+---
+<a href="/#projects" class="inline-block font-mono text-[0.6875rem] uppercase tracking-[0.06em] text-text-muted mb-10 border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">&larr; Projects</a>
+
+<div class="mb-12 pb-8 border-b border-(--color-border)">
+  <p class="font-mono text-[0.6875rem] uppercase tracking-widest text-text-muted mb-4">{label}</p>
+  <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight leading-none mb-4">{title}</h1>
+  <p class="text-[1.0625rem] text-text-secondary max-w-150 leading-relaxed">{intro}</p>
+  {repo && (
+    <a href={repo} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 font-mono text-xs uppercase tracking-[0.06em] text-text-muted pb-0.5 border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">View on GitHub &rarr;</a>
+  )}
+</div>

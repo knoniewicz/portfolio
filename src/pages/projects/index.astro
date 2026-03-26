@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import MonoLink from '../../components/MonoLink.astro';
+import projects from '../../data/projects.json';
+---
+
+<Base title="Projects / Kacper Noniewicz" description="All projects by Kacper Noniewicz.">
+  <div class="py-16 pb-20">
+    <MonoLink href="/" class="mb-10">&larr; Home</MonoLink>
+
+    <div class="mb-12 pb-8 border-b border-(--color-border)">
+      <p class="font-mono text-[0.6875rem] uppercase tracking-widest text-text-muted mb-4">All projects</p>
+      <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight leading-none">Projects</h1>
+    </div>
+
+    <div>
+      {projects.map((project, i) => (
+        <ProjectCard
+          name={project.name}
+          state={project.state}
+          summary={project.summary}
+          labels={project.labels}
+          href={project.url || `/projects/${project.slug}/`}
+          external={!!project.url}
+          first={i === 0}
+        />
+      ))}
+    </div>
+
+    <a href="/projects/anima/" class="block mt-7 p-5 border-l-[3px] border-(--color-border) bg-bg-subtle no-underline hover:bg-(--color-bg-elevated) transition-colors">
+      <p class="text-sm text-text-secondary"><strong class="text-(--color-text)">Anima</strong> is the private, event-driven system that ties my personal infrastructure together. No cloud dependency. Korpus and Pularis were extracted from here.</p>
+      <span class="inline-block mt-3 font-mono text-xs uppercase tracking-[0.06em] text-text-muted border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">Read more about Anima</span>
+    </a>
+  </div>
+</Base>
