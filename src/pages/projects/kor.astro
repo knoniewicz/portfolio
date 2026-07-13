@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../../components/ProjectPageHeader.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
+import TagList from '../../components/TagList.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<Base title="Kor / Kacper Noniewicz" description="Minimal Go TCP message router and service protocol for Anima.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader
+      label="Private / Go / Active development"
+      title="Kor"
+      intro="A small TCP message router and service protocol for Anima. Kor gives local services a minimal shared transport for registering handlers, publishing events, and making request/response calls without forcing every service to know about every other service."
+    />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectList items={[
+          "Accepts service connections over length-prefixed TCP frames",
+          "Identifies peers with HELLO and tracks their registered handlers and subscriptions",
+          "Routes request/response calls by subject and correlates replies by ID",
+          "Delivers published messages to subscribers and dispatches requests to handlers",
+          "Exposes a lightweight HTTP debug snapshot at /debug/state",
+        ]} />
+      </ProjectSection>
+
+      <ProjectSection title="Why I built it">
+        <ProjectProse>
+          <p>
+            Anima is made of small services that should be able to evolve independently.
+            Kor is the narrow communication layer between them: a focused daemon and client
+            API for local service-to-service communication, without making every service
+            implement its own discovery, routing, or request correlation.
+          </p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="How it works">
+        <CodeBlock>Service → length-prefixed TCP frame → Kor daemon → handler or subscribers</CodeBlock>
+        <ProjectProse>
+          <p>
+            A client connects and identifies itself, then registers the subjects it handles
+            or subscribes to. Calls carry a subject, request ID, and JSON payload. The daemon
+            selects a registered handler, forwards the request, and routes the response back
+            to the originating client. The wire layer stays deliberately small: HELLO,
+            HANDLE, SUB, PUB, REQ, RES, ERR, PING, and PONG.
+          </p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Go", "TCP", "JSON", "Pub/Sub", "Request/response"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Direction">
+        <ProjectProse>
+          <p>
+            The foundation works today as a Go daemon and client with runnable examples.
+            The next layer is keeping the protocol minimal while making services discoverable:
+            descriptors stored alongside handler registrations, built-in
+            <code class="font-mono text-sm">kor.capabilities</code> and
+            <code class="font-mono text-sm">kor.describe</code> handlers, JSON Schema exposed
+            as metadata, subject patterns and wildcards, and a Node client for Anima's UI.
+          </p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>Private and actively developed. Kor is intended to become the small service protocol underneath Anima.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>
