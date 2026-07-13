@@ -22,6 +22,17 @@
     "signal": "Fetch, transform, emit. Stateless by design."
   },
   {
+    "slug": "kor",
+    "name": "Kor",
+    "state": "Active development",
+    "featured": true,
+    "url": null,
+    "repo": null,
+    "summary": "Minimal Go TCP message router for Anima. Services register handlers, publish events, and make request/response calls through a compact framed protocol.",
+    "labels": ["Go", "TCP", "Pub/Sub", "JSON"],
+    "signal": "Small transport, explicit service boundaries."
+  },
+  {
     "slug": "futura",
     "name": "Futura",
     "state": "Earlier work",
