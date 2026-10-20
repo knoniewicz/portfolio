@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../../components/ProjectPageHeader.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
+import TagList from '../../components/TagList.astro';
+---
+
+<Base title="Bober / Kacper Noniewicz" description="Small Go coding agent with a Lua extension host, driven over the Agent Client Protocol.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader
+      label="Private / Go / Active development"
+      title="Bober"
+      intro="A small coding agent in one Go process. Your editor or terminal is the interface, through the Agent Client Protocol. The core stays minimal and everything else is a Lua extension."
+    />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectList items={[
+          "Runs a model loop over the OpenAI Responses API, with OpenAI-compatible and local providers supported",
+          "Ships two basic tools, shell_command and apply_patch, and a Lua extension host",
+          "Works with any ACP client, such as Zed or a terminal client",
+          "Provides subagents, sessions, skills, MCP and a code mode as extensions, not core features",
+          "Builds reproducibly with Nix",
+        ]} />
+      </ProjectSection>
+
+      <ProjectSection title="Why I built it">
+        <ProjectProse>
+          <p>
+            I wanted an agent I fully understand and can shape: a core small enough to read,
+            with features I can switch on or off per project. Keeping Go for what must always
+            work and Lua for everything else makes it easy to prune instead of pile on.
+          </p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Go", "Lua", "ACP", "Nix", "LLM tool use"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>Private and used daily. It is also the starting point for internal AI tooling I build at work.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>

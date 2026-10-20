@@ -7,7 +7,12 @@
     "url": null,
     "repo": "https://github.com/knoniewicz/korpus",
     "summary": "Go service that owns the canonical write path. Validates events against JSON Schemas, persists to Postgres, handles FK-aware retries.",
-    "labels": ["Go", "Postgres", "Redis", "JSON Schema"],
+    "labels": [
+      "Go",
+      "Postgres",
+      "Redis",
+      "JSON Schema"
+    ],
     "signal": "Single write boundary with explicit contracts."
   },
   {
@@ -18,7 +23,12 @@
     "url": null,
     "repo": "https://github.com/knoniewicz/pularis",
     "summary": "Stateless Go polling adapter. Config-driven HTTP fetcher that transforms API responses into Redis events. No persistence inside.",
-    "labels": ["Go", "Redis", "TOML", "MIT"],
+    "labels": [
+      "Go",
+      "Redis",
+      "TOML",
+      "MIT"
+    ],
     "signal": "Fetch, transform, emit. Stateless by design."
   },
   {
@@ -29,8 +39,29 @@
     "url": null,
     "repo": null,
     "summary": "Minimal Go TCP message router for Anima. Services register handlers, publish events, and make request/response calls through a compact framed protocol.",
-    "labels": ["Go", "TCP", "Pub/Sub", "JSON"],
+    "labels": [
+      "Go",
+      "TCP",
+      "Pub/Sub",
+      "JSON"
+    ],
     "signal": "Small transport, explicit service boundaries."
+  },
+  {
+    "slug": "bober",
+    "name": "Bober",
+    "state": "Active development",
+    "featured": false,
+    "url": null,
+    "repo": null,
+    "summary": "Small coding agent in one Go process. Speaks the Agent Client Protocol, runs a model loop with two basic tools, and everything else is a Lua extension.",
+    "labels": [
+      "Go",
+      "Lua",
+      "ACP",
+      "Agents"
+    ],
+    "signal": "Minimal core, features as extensions."
   },
   {
     "slug": "futura",
@@ -40,7 +71,12 @@
     "url": null,
     "repo": null,
     "summary": "Diploma project. My scope was the ML pipeline: Python/Jupyter with TA-Lib indicators, RFE feature selection, LightGBM classifier for next-day stock trends, MongoDB writeback.",
-    "labels": ["Python", "Jupyter", "LightGBM", "Educational"],
+    "labels": [
+      "Python",
+      "Jupyter",
+      "LightGBM",
+      "Educational"
+    ],
     "signal": "ML workflow execution, not a trading system claim."
   }
 ]
