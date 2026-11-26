@@ -6,87 +6,94 @@ tags: ["AI", "MCP", "RAG", "Self-hosted", "Industrial software"]
 draft: true
 ---
 
-> **TODO before publishing:** fill in the remaining `TODO(you)` gaps, check with Schauer that the
-> level of detail is fine, then delete this box.
+> **TODO before publishing:** check with Schauer that the level of detail is fine, then delete
+> this box.
 
 At Agraria Wels 2026, SIGI won **Gold** in the *work efficiency and workplace quality* category of
 the Agrarfuchs innovation award, presented by Agraria together with the Österreichische
 BauernZeitung ([winners](https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-preistr-ger)).
-SIGI is Schauer Agrotronic's AI service assistant: it analyses faults using live data from the
-machines themselves.
+SIGI is Schauer Agrotronic's AI service assistant. It diagnoses faults in barn equipment using
+live data from the machines themselves.
 
-I built most of SIGI. This post covers the problem, how it is put together and what I would keep.
+I built most of SIGI. This post covers the problem it solves, how it is put together, and the one
+lesson I would pass on to anyone building something similar.
 
-## The problem
+## The problem: diagnosis by description
 
-When something in a barn stopped, finding out why was slow. Someone had to check the device itself,
-or our cloud sent a notification, and then the next step was a call to customer service, a
-technician, or a search through the documentation. Each of those means a person piecing together
-the machine's state from a description, before anyone can even start on the fix.
+When something in a barn stopped, the slow part was finding out why. Someone had to walk to the
+device and read it, or our cloud sent a notification, and then came a call to customer service, a
+call to a technician, or a search through the documentation.
 
-SIGI is meant for all of them: farmers, customer service and technicians get the same assistant,
-looking at the same live data.
+Every one of those paths has the same weakness: a person reconstructs the machine's state from a
+description. "It shows an error and the valve doesn't open" is where a diagnosis starts, and the
+questions that follow are mostly the machine's own data, asked for one item at a time over the
+phone.
+
+SIGI is built for everyone on those paths: farmers, customer service and technicians all get the
+same assistant, looking at the same live data.
 
 ## How it is built
 
-### A model that runs on our own hardware
+### A model on our own hardware
 
-The language model is an open-weights model on a GPU server in our own building. No machine data
-and no customer data leave our infrastructure, and there is no per-request bill for a cloud API.
+The language model is an open-weights model running on a GPU server in our own building. No
+machine data and no customer data leave our infrastructure, there is no per-request bill for a
+cloud API, and we control which model version answers.
 
 ### Grounded in our documentation
 
-Answers come from retrieval, not from what the model happens to remember. I indexed our machine
-manuals, and SIGI pulls the relevant passages in before it answers, so an answer points at the real
-procedure for that machine.
+Answers come from retrieval, not from whatever the model happens to remember. I indexed our machine
+manuals, and SIGI pulls the relevant passages in before it answers, so an answer points at the
+documented procedure for that specific machine instead of a plausible-sounding general one.
 
 The hardest part was the images. Our manuals are full of them: wiring diagrams, exploded views,
-photos of the right valve or sensor. Text-only retrieval simply skips half of what a technician
-actually needs, so doing something smart with the images is the part I spent the most time on,
-trying approaches and benchmarking them against each other. What we ended up with stays in-house.
+photos of the right valve or sensor. Text-only retrieval silently drops half of what a technician
+actually needs, so making the images useful is where I spent most of my time, building candidate
+approaches and benchmarking them against each other. What we ended up with stays in-house.
 
-Customer service reports close the loop: what SIGI stated gets compared with what the service
-report later recorded, and that feedback goes back into the system.
+Customer service reports close the loop. What SIGI said in a case is compared with what the service
+report later recorded as the actual cause, and that feedback goes back into the system. Every
+resolved case makes the next answer better grounded.
 
 ### Live machine data through MCP
 
-SDU-X is the control hardware inside our products, and every SDU-X device can be queried directly
-on the device itself. The model talks to them through MCP (Model Context Protocol): I wrote the MCP server
-for SDU-X, so the assistant reads live state and fault data from the machine instead of guessing
-from a description.
+SDU-X is the control hardware inside our products, and every SDU-X device can be queried directly.
+SIGI talks to them through MCP (Model Context Protocol): I wrote the MCP server for SDU-X, so the
+assistant reads live state and fault data from the machine itself. That turns the first ten
+minutes of a support call, "what does the screen say?", into a tool call.
 
 ### One aggregator for every device
 
-One MCP server per device type does not scale when an agent needs to see a whole barn. I built an
-MCP aggregator: every device's MCP server registers with it, and the agent connects to a single
-endpoint that exposes all of them. Adding a new device type means adding one more server behind the
-aggregator. The agent's setup doesn't change.
+One MCP server per device type doesn't scale when an agent needs to see a whole barn. The answer
+is an MCP aggregator: every device's MCP server registers with it, and the agent connects to a
+single endpoint that exposes all of them. Adding a new device type means adding one more server
+behind the aggregator, and the agent's configuration doesn't change.
 
-The aggregator also became an internship project. I mentored an intern on the team: I showed him
-the infrastructure, and as his internship work he wrote a first prototype of the aggregator. It
-was rough, as first prototypes are, but it proved the idea. The aggregator SIGI runs on today is my
-heavy rewrite of it, built on that prototype.
+The aggregator also became an internship project. I mentored an intern on the team: I walked him
+through the infrastructure, and as his internship work he wrote the first prototype. It was rough,
+as first prototypes are, but it proved the idea. The aggregator SIGI runs on today is my heavy
+rewrite, built on that prototype.
 
 ## What SIGI does
 
 - Reads the machine's live state and fault data at the moment someone asks for help.
 - Explains the likely cause and the next check, grounded in our documentation.
-- Users talk to it through our internal chatbot, so there is nothing new to install or learn.
+- Lives in our internal chatbot, so nobody has to install or learn a new tool.
 
 ## What I learned
 
 **Clean data from day one decides how good the AI gets.** The model was never the hard part. What
 made SIGI work was data it could actually reach and trust: manuals it could index, controllers it
-could query through one interface, service reports it could learn from. Data that is hard to access
-or messy doesn't get better because there is an AI in front of it; it just produces confident wrong
-answers faster.
+could query through one interface, service reports it could learn from.
 
-If I started again, I would put even more effort into structure and access first, and treat the
-model as the last piece.
+The reverse is just as true. An AI layer doesn't fix data that is messy or hard to access; it
+turns that mess into confident wrong answers, faster. If I started again, I would spend even more
+of the effort on structure and access first, and treat the model as the last, most replaceable
+piece.
 
 ## Results
 
-We don't have numbers yet, and I won't make some up. What I can say is how it feels: support
-gets to "this is what is wrong" faster, because the first question no longer has to be "what does
-the screen say?". Time to diagnosis is what SIGI is built to shorten, and it is the thing I would
-measure next.
+We don't have numbers yet, and I won't invent any. What I can describe is how it feels: support
+gets to "this is what's wrong" faster, because the conversation starts from the machine's actual
+state instead of a description of it. Time to diagnosis is what SIGI is built to shorten, and it is
+the first thing I would measure.
