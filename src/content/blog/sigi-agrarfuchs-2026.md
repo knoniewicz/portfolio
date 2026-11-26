@@ -19,17 +19,20 @@ I built most of SIGI. This post covers the problem, how it is put together and w
 
 ## The problem
 
-TODO(you): what a service call looked like before SIGI. Who calls whom when a feeding system or
-stall machine stops, what information the technician has, what takes the time.
+When something in a barn stopped, finding out why was slow. Someone had to check the device itself,
+or our cloud sent a notification, and then the next step was a call to customer service, a
+technician, or a search through the documentation. Each of those means a person piecing together
+the machine's state from a description, before anyone can even start on the fix.
+
+SIGI is meant for all of them: farmers, customer service and technicians get the same assistant,
+looking at the same live data.
 
 ## How it is built
 
 ### A model that runs on our own hardware
 
-The language model is self-hosted and runs locally. No machine data and no customer data leave
-our infrastructure, and there is no per-request bill for a cloud API.
-
-TODO(you): the model and serving stack you are allowed to name, and the hardware it runs on.
+The language model is an open-weights model on a GPU server in our own building. No machine data
+and no customer data leave our infrastructure, and there is no per-request bill for a cloud API.
 
 ### Grounded in our documentation
 
@@ -75,5 +78,7 @@ model as the last piece.
 
 ## Results
 
-TODO(you): anything measurable you are allowed to share (time to diagnosis, calls resolved without
-a visit, pilot farms). If there are no numbers yet, say what you are measuring.
+The number we care about is time to diagnosis for support: how long it takes from "something is
+wrong" to knowing what is wrong. That is what SIGI is built to shorten, and what we are measuring.
+
+TODO(you): add a figure here once you have one you are allowed to share.

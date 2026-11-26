@@ -108,5 +108,11 @@ an OpenAPI spec becomes a set of handlers.
 
 ## What I would do differently
 
-TODO(you): one or two honest lessons. For example: how long version one ran before the problems
-showed, or what you would build first if you started over.
+**I would start with a monolith.** Splitting Anima into services felt clean, but every service
+was one more process to deploy, watch and keep in step with the others, and for one person's
+infrastructure that cost never paid for itself. It is the main reason I stopped building Anima.
+
+What I wanted from it all along was small scripts reacting to my data. Today that is
+[Bober](/projects/bober), one agent with custom Lua scripts, which does what Anima was meant to do
+with far fewer moving parts. Kor, Korpus and Kron still stand on their own as open-source projects
+for anyone who does want the pieces separate.
