@@ -13,6 +13,7 @@
   "author": "Kacper Noniewicz",
   "license": "MIT",
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.0",
     "tailwindcss": "^4.2.2"

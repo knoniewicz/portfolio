@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../../components/ProjectPageHeader.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import ProjectProse from '../../components/ProjectProse.astro';
+import TagList from '../../components/TagList.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<Base title="Kron / Kacper Noniewicz" description="A Go host that runs sandboxed Lua connectors and automations on a timer or an event.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader label="Public / Go / Lua / MIT" title="Kron" intro="One long-lived Kor service that runs Lua connectors and automations. Jobs are plain Lua files in git, triggered by time or by an event, with a sandbox and a run record for every execution." repo="https://github.com/knoniewicz/kron" />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectList items={[
+          "Two trigger kinds only: time (every, at) and event (on, with prefix wildcards)",
+          "Catch-up for daily jobs that were missed while the host was down",
+          "A small ctx API: HTTP, JSON, hashing for deterministic ids, Kor calls, Korpus writes and queries, and an optional agent step",
+          "Writes an automation.run record for every run, so failures and missed runs are visible",
+          "Reloads jobs on SIGHUP; a broken file keeps the old jobs running",
+        ]} />
+      </ProjectSection>
+
+      <ProjectSection title="How it works">
+        <CodeBlock>{`automation "morning-brief" {
+  at = "06:00", catchup = true,
+  run = function(ctx) ... end,
+}`}</CodeBlock>
+        <ProjectProse>
+          <p>The Lua sandbox has no filesystem, <code class="font-mono text-sm">os</code> or <code class="font-mono text-sm">require</code>. Network goes through <code class="font-mono text-sm">ctx.http_*</code>, environment variables need an allow-list, and every run has a timeout enforced inside the VM and on every call.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Go", "Lua", "Kor", "Korpus", "cron"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>Runs my connectors and automations every day. The engine is open source under MIT; my own jobs live in a separate private repository.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>

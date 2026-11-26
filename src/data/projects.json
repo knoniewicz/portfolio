@@ -6,14 +6,14 @@
     "featured": true,
     "url": null,
     "repo": "https://github.com/knoniewicz/korpus",
-    "summary": "Go service that owns the canonical write path. Validates events against JSON Schemas, persists to Postgres, handles FK-aware retries.",
+    "summary": "Single writer for my personal-data spine. Validates records against JSON Schemas, stores them in SQLite, acknowledges a write only after commit.",
     "labels": [
       "Go",
-      "Postgres",
-      "Redis",
-      "JSON Schema"
+      "SQLite",
+      "JSON Schema",
+      "AGPL-3.0"
     ],
-    "signal": "Single write boundary with explicit contracts."
+    "signal": "One write boundary, acked writes, safe retries."
   },
   {
     "slug": "pularis",
@@ -34,18 +34,34 @@
   {
     "slug": "kor",
     "name": "Kor",
-    "state": "Active development",
+    "state": "Public",
     "featured": true,
     "url": null,
-    "repo": null,
-    "summary": "Minimal Go TCP message router for Anima. Services register handlers, publish events, and make request/response calls through a compact framed protocol.",
+    "repo": "https://github.com/knoniewicz/kor",
+    "summary": "Small Go TCP message router. Services register handlers, publish events, and call each other by name through a compact framed protocol.",
     "labels": [
       "Go",
       "TCP",
       "Pub/Sub",
-      "JSON"
+      "MIT"
     ],
     "signal": "Small transport, explicit service boundaries."
+  },
+  {
+    "slug": "kron",
+    "name": "Kron",
+    "state": "Public",
+    "featured": false,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/kron",
+    "summary": "Go host for sandboxed Lua connectors and automations, triggered by time or by an event, with a run record for every execution.",
+    "labels": [
+      "Go",
+      "Lua",
+      "Kor",
+      "MIT"
+    ],
+    "signal": "Automations as small Lua files in git."
   },
   {
     "slug": "bober",

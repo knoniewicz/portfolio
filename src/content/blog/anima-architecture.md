@@ -1,0 +1,112 @@
+---
+title: "Anima: how my personal infrastructure lost Redis, Postgres and a supervisor"
+description: "The second version of my self-hosted data spine: a small TCP router, a SQLite store and a Lua host, and why each piece is boring on purpose."
+date: 2026-11-26
+tags: ["Go", "Architecture", "SQLite", "Self-hosted"]
+draft: true
+---
+
+Anima is the private system that ties my personal infrastructure together: collectors that fetch
+data, a store that keeps it, automations that react to it, a UI that shows it and an agent that
+helps when judgement is needed. It runs on my own machines with no cloud dependency.
+
+This is the second version. The first one worked, but every new piece made it harder to reason
+about. Here is what changed and why.
+
+## Version one
+
+```
+service -> Redis pub/sub -> Korpus -> JSON Schema -> Postgres
+                 ^
+                Sol (extension supervisor + MCP daemon)
+```
+
+- **Redis pub/sub** carried every event. It is fire-and-forget: if a consumer was down, its
+  messages were gone.
+- **Korpus** validated events against JSON Schemas and wrote them to **Postgres**. Child records
+  could arrive before their parents, so Korpus needed foreign-key-aware ordering and retries.
+- **Sol** discovered extensions on disk, supervised them and proxied their tools over MCP.
+
+Three of these were solving problems I had created myself: lost messages, write ordering and a
+custom supervisor.
+
+## Version two
+
+```
+ Kron (Lua connectors      Lodge (UI)
+ and automations)            |
+        \                    |
+         v                   v
+ agent  <---->  KOR  (handle / request / publish / subscribe)
+                 ^
+                 |
+              KORPUS  (schemas -> validate -> SQLite)
+```
+
+### Kor: the only glue
+
+[Kor](https://github.com/knoniewicz/kor) is a small TCP message router written in Go.
+Services connect, register the handlers they serve and the subjects they listen to, and then call
+each other by name. The wire protocol is a handful of length-prefixed frames: hello, handle,
+subscribe, publish, request, response, error, ping. Kor has no business logic.
+
+It replaced Redis, Sol and MCP as the glue. Supervision moved to systemd, so every client
+reconnects on its own.
+
+### Korpus: writes are requests, not events
+
+[Korpus](https://github.com/knoniewicz/korpus) is now just a Kor service on SQLite (pure Go, WAL).
+The important change is the write contract:
+
+- A write is a **request with an ack**, sent after the SQLite commit. Collectors retry until they
+  get it.
+- **Ids are deterministic** (for example a hash of the source URL), so a retry is an upsert.
+- **Relations are plain ids** inside the JSON, with no enforced foreign keys. The whole ordering
+  and retry machinery from version one disappeared.
+- Publications (`korpus.<type>.written`) are only notifications, where losing one is acceptable.
+
+Korpus also stopped owning schemas. Each service registers the schema of its own types when it
+starts, and registering the same schema again is a no-op.
+
+### Kron: automations as Lua files in git
+
+[Kron](https://github.com/knoniewicz/kron) is one long-lived Go process that runs Lua connectors
+and automations. There are only two trigger kinds: time (`every`, `at`) and event (`on`).
+A job looks like this:
+
+```lua
+automation "morning-brief" {
+  at = "06:00",
+  catchup = true,
+  run = function(ctx)
+    local d = ctx.query("ops.failed_unit", { limit = 20 })
+    local text = ctx.ask("Summarise; omit anything healthy.", d)
+    ctx.write("brief", ctx.today(), { text = text })
+  end,
+}
+```
+
+The Lua sandbox has no filesystem, no `os` and no `require`. Network goes through `ctx.http_*`
+only, environment variables need an allow-list, and every run has a timeout. Each run writes an
+`automation.run` record to Korpus, so a failed or missed run shows up in the UI and raises an alert.
+
+### The edges
+
+Small bridges live in [kor-ext](https://github.com/knoniewicz/kor-ext): webhooks become Kor
+events, events go out as ntfy notifications, Kor handlers are exposed as MCP tools for agents, and
+an OpenAPI spec becomes a set of handlers.
+
+## Rules I kept
+
+- **One writer.** Everything durable goes through Korpus.
+- **Ack what matters, publish what doesn't.** Writes are acked requests; notifications may be lost.
+- **Raw and derived data stay apart.** Anything an LLM produced carries the model and prompt
+  version, so it can be recomputed without fetching the source again.
+- **Actions that touch the world need a confirmation** in the UI. Notify-only automations don't.
+- **Boring parts on purpose.** SQLite, systemd, plain JSON and Lua files are easy to debug at
+  2 a.m.
+
+## What I would do differently
+
+TODO(you): one or two honest lessons. For example: how long version one ran before the problems
+showed, or what you would build first if you started over.

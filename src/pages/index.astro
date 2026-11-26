@@ -67,7 +67,7 @@ import TagList from '../components/TagList.astro';
       ))}
     </div>
     <a href="/projects/anima/" class="block mt-7 p-5 border-l-[3px] border-(--color-border) bg-bg-subtle no-underline hover:bg-(--color-bg-elevated) transition-colors">
-      <p class="text-sm text-text-secondary"><strong class="text-(--color-text)">Anima</strong> is the private, event-driven system that ties my personal infrastructure together. No cloud dependency. Korpus and Pularis were extracted from here.</p>
+      <p class="text-sm text-text-secondary"><strong class="text-(--color-text)">Anima</strong> is the private, event-driven system that ties my personal infrastructure together. No cloud dependency. Kor, Korpus and Kron were extracted from here.</p>
       <span class="inline-block mt-3 font-mono text-xs uppercase tracking-[0.06em] text-text-muted border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">Read more about Anima</span>
     </a>
     {projects.length > 3 && (
@@ -81,6 +81,9 @@ import TagList from '../components/TagList.astro';
   <section class="py-16 border-t border-(--color-border)" id="experience">
     <SectionLabel text="Experience" />
     <div>
+      <TimelineItem date="11/2026" title="Agrarfuchs 2026, Gold" org="Agraria Wels, work efficiency category">
+          Built most of SIGI, Schauer Agrotronic's AI service assistant: a self-hosted model with retrieval over our documentation, an MCP server for SDU-X and an MCP aggregator that gives the agent one endpoint for all our devices. Mentored an intern on the project. <a href="https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-preistr-ger" target="_blank" rel="noopener noreferrer" class="border-b border-border-subtle hover:border-(--color-text)">Winners</a>
+      </TimelineItem>
       <TimelineItem date="07/2024 – present" title="Software Developer" org="Schauer Agrotronic, Full-time">
           Building control software for constrained hardware systems and internal AI tooling. Leading the migration from legacy Angular to the modern stack across the product line. Current AI work is owned end-to-end, from architecture to implementation.
       </TimelineItem>
