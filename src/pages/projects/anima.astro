@@ -7,16 +7,16 @@ import ProjectProse from '../../components/ProjectProse.astro';
 import TagList from '../../components/TagList.astro';
 ---
 
-<Base title="Anima / Kacper Noniewicz" description="Private self-hosted system of services for personal infrastructure.">
+<Base title="Anima / Kacper Noniewicz" description="My former self-hosted personal infrastructure, replaced by Bober.">
   <div class="py-16 pb-20">
       <ProjectPageHeader
-        label="Private / Self-hosted"
+        label="Private / Retired"
         title="Anima"
-        intro="A private, event-driven platform for my personal infrastructure. Fully self-hosted, with no cloud dependency. Kor, Korpus and Kron started here and were extracted into standalone open-source projects."
+        intro="My event-driven platform for personal infrastructure, fully self-hosted. Retired in favour of Bober, which does the same job with far fewer moving parts. Kor, Korpus and Kron started here and live on as open-source projects."
       />
 
       <div class="max-w-180">
-        <ProjectSection title="What it does">
+        <ProjectSection title="What it did">
           <ProjectList
             items={[
               "Collects data from external APIs, devices and local integrations with Lua connectors (Kron)",
@@ -66,9 +66,21 @@ import TagList from '../../components/TagList.astro';
           />
         </ProjectSection>
 
+        <ProjectSection title="Why I stopped">
+          <ProjectProse>
+            <p>
+              Splitting it into services felt clean, but every service was one more
+              process to deploy, watch and keep in step, and for one person's
+              infrastructure that never paid off. What I wanted all along was small
+              scripts reacting to my data. <a href="/projects/bober/">Bober</a>, one
+              agent with custom Lua scripts, does exactly that, so it replaced Anima.
+            </p>
+          </ProjectProse>
+        </ProjectSection>
+
         <ProjectSection title="Status">
           <ProjectProse>
-            <p>Private. Actively developed.</p>
+            <p>Retired. Replaced by <a href="/projects/bober/">Bober</a>; Kor, Korpus and Kron are maintained as standalone projects.</p>
           </ProjectProse>
         </ProjectSection>
       </div>

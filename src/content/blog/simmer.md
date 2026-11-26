@@ -54,9 +54,9 @@ the motor.
 
 ## What I learned
 
-**Smart devices are more open than they look.** The robot is an ordinary Android tablet on top of
-a motor controller. Once I could run my own software on it, it stopped being a closed appliance and
-became something I could make fit how I actually cook.
+**Smart devices are more open than they look.** The robot is an ordinary Android 6 tablet on top
+of a motor controller, and rooting it was surprisingly easy. Once I had root, it stopped being a
+closed appliance and became something I could make fit how I actually cook.
 
 **The win is the whole loop, not the app.** Before, cooking meant researching recipes, planning the
 meals, checking what was already at home and then shopping for the rest. Now I pick what I want in

@@ -1,6 +1,6 @@
 ---
-title: "Anima: how my personal infrastructure lost Redis, Postgres and a supervisor"
-description: "The second version of my self-hosted data spine: a small TCP router, a SQLite store and a Lua host, and why each piece is boring on purpose."
+title: "Anima: two versions of my personal infrastructure, and why I replaced it"
+description: "From Redis, Postgres and a supervisor to a small TCP router, SQLite and Lua, and why I finally swapped the whole thing for one agent with scripts."
 date: 2026-11-26
 tags: ["Go", "Architecture", "SQLite", "Self-hosted"]
 draft: true
@@ -10,8 +10,13 @@ Anima is the private system that ties my personal infrastructure together: colle
 data, a store that keeps it, automations that react to it, a UI that shows it and an agent that
 helps when judgement is needed. It runs on my own machines with no cloud dependency.
 
-This is the second version. The first one worked, but every new piece made it harder to reason
-about. Here is what changed and why.
+Or rather, it was. I have stopped building Anima: the services were more work to run than they
+were worth for one person, and what I actually wanted from it now lives in
+[Bober](/projects/bober), one agent with custom Lua scripts. Kor, Korpus and Kron came out of it
+and live on as open-source projects.
+
+This post is about the second version: what changed from the first, why, and why I still ended up
+replacing it.
 
 ## Version one
 

@@ -78,7 +78,7 @@ model as the last piece.
 
 ## Results
 
-The number we care about is time to diagnosis for support: how long it takes from "something is
-wrong" to knowing what is wrong. That is what SIGI is built to shorten, and what we are measuring.
-
-TODO(you): add a figure here once you have one you are allowed to share.
+We don't have numbers yet, and I won't make some up. What I can say is how it feels: support
+gets to "this is what is wrong" faster, because the first question no longer has to be "what does
+the screen say?". Time to diagnosis is what SIGI is built to shorten, and it is the thing I would
+measure next.
