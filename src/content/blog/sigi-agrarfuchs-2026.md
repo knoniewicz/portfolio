@@ -50,9 +50,8 @@ report later recorded, and that feedback goes back into the system.
 
 ### Live machine data through MCP
 
-SDU-X is the control hardware inside our products: HorseX in horse stables, StrawX for automatic
-straw littering, CowGuard for the manure scrapers in cattle barns, and more. Every one of these devices can be queried directly on the
-device itself. The model talks to them through MCP (Model Context Protocol): I wrote the MCP server
+SDU-X is the control hardware inside our products, and every SDU-X device can be queried directly
+on the device itself. The model talks to them through MCP (Model Context Protocol): I wrote the MCP server
 for SDU-X, so the assistant reads live state and fault data from the machine instead of guessing
 from a description.
 
