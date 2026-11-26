@@ -33,7 +33,7 @@ ${posts ? `## Writing\n\n${posts}\n\n` : ''}## Background
 
 - Education: HTBLA Grieskirchen, Informatik (2019-2024, EQF level 5)
 - Languages: Polish, German, English
-- Skills: Go, TypeScript, Angular, Node.js, Kotlin, Python, SQLite, LLMs, RAG, MCP, embedded and touch-first UIs
+- Skills: Go, TypeScript, Angular, Node.js, Python, SQLite, LLMs, RAG, MCP, embedded and touch-first UIs
 
 ## Contact
 
