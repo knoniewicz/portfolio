@@ -4,9 +4,10 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  home?: boolean; // the home page brings its own layout, no header bar or footer
 }
 
-const { title = "Software Developer | Industrial Software, AI Infrastructure, Event-Driven Systems", description = "Software Developer. Go, TypeScript, Python." } = Astro.props;
+const { title = "Software Developer | Industrial Software, AI Infrastructure, Event-Driven Systems", description = "Software Developer. Go, TypeScript, Python.", home = false } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
 ---
@@ -33,43 +34,34 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
     <meta name="twitter:image" content={socialImageUrl.toString()} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <script is:inline>
-      const stored = localStorage.getItem('theme');
-      const sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', stored || sys);
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Profile for AI assistants" />
+    <slot name="head" />
   </head>
   <body class="leading-relaxed">
-    <header class="sticky top-0 z-50 bg-bg border-b border-(--color-border)">
-      <div class="max-w-275 mx-auto px-8 py-3.5 flex items-center justify-between">
-        <a href="/" class="font-mono text-[0.8125rem] font-medium uppercase tracking-[0.08em]">Kacper Noniewicz</a>
-        <div class="flex items-center gap-8">
-          <nav class="hidden md:flex gap-6">
-            <a href="/#about" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">About</a>
-            <a href="/#projects" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Projects</a>
-            <a href="/#experience" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Experience</a>
-            <a href="/#contact" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Contact</a>
-          </nav>
-          <button class="border-2 border-border-subtle w-8 h-8 grid place-items-center text-text-muted text-sm cursor-pointer hover:border-(--color-border) hover:text-(--color-text) transition-colors bg-transparent" id="theme-toggle" aria-label="Toggle theme">&#9684;</button>
-        </div>
-      </div>
-    </header>
-    <div class="max-w-275 mx-auto px-8 max-md:px-5">
+    {home ? <slot /> : <>
+    <div class="max-w-275 mx-auto px-8 max-md:px-5 rise">
       <slot />
     </div>
-    <footer class="border-t border-(--color-border) py-6">
-      <div class="max-w-275 mx-auto px-8 max-md:px-5 font-mono text-[0.6875rem] tracking-[0.04em] uppercase text-text-muted">
+    <footer class="border-t border-border-subtle py-6">
+      <div class="max-w-275 mx-auto px-8 max-md:px-5 text-[0.8125rem] text-text-muted">
         <span>&copy; {new Date().getFullYear()} Kacper Noniewicz</span>
       </div>
     </footer>
+    </>}
     <script>
-      const toggle = document.getElementById('theme-toggle');
-      const html = document.documentElement;
-      toggle?.addEventListener('click', () => {
-        const next = (html.getAttribute('data-theme') || 'light') === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+      // Underlines fill from the side the cursor comes in and drain out the side it leaves.
+      document.addEventListener("pointerover", (e) => {
+        const el = (e.target as Element).closest?.(".ul, .post a") as HTMLElement | null;
+        if (!el || el.contains(e.relatedTarget as Node)) return;
+        const r = el.getBoundingClientRect();
+        el.style.backgroundPosition = (e.clientX < r.left + r.width / 2 ? "0" : "100%") + " 100%, 0 100%";
+      });
+      document.addEventListener("pointerout", (e) => {
+        const el = (e.target as Element).closest?.(".ul, .post a") as HTMLElement | null;
+        if (!el || el.contains(e.relatedTarget as Node)) return;
+        const r = el.getBoundingClientRect();
+        el.style.backgroundPosition = (e.clientX < r.left + r.width / 2 ? "0" : "100%") + " 100%, 0 100%";
       });
     </script>
   </body>

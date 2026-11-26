@@ -11,9 +11,10 @@ import CodeBlock from '../../components/CodeBlock.astro';
 <Base title="Kor / Kacper Noniewicz" description="Minimal Go TCP message router and service protocol for Anima.">
   <div class="py-16 pb-20">
     <ProjectPageHeader
-      label="Private / Go / Active development"
+      label="Retired / Go / MIT"
       title="Kor"
       intro="A small TCP message router and service protocol for Anima. Kor gives local services a minimal shared transport for registering handlers, publishing events, and making request/response calls without forcing every service to know about every other service."
+      repo="https://github.com/knoniewicz/kor"
     />
 
     <div class="max-w-180">
@@ -70,7 +71,7 @@ import CodeBlock from '../../components/CodeBlock.astro';
 
       <ProjectSection title="Status">
         <ProjectProse>
-          <p>Private and actively developed. Kor is intended to become the small service protocol underneath Anima.</p>
+          <p>Retired in November 2026. Kor was the service protocol underneath Anima and then my data spine, with reconnecting clients, timeouts, typed errors, subject wildcards and an optional shared token. Bober now does that job with a few Lua scripts, so there is no separate router to run anymore.</p>
         </ProjectProse>
       </ProjectSection>
     </div>

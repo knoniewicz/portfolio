@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/cv-pdf.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -13,6 +13,7 @@
   "author": "Kacper Noniewicz",
   "license": "MIT",
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.0",
     "tailwindcss": "^4.2.2"

@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import MonoLink from '../../components/MonoLink.astro';
+import TagList from '../../components/TagList.astro';
+import { getPosts, formatDate } from '../../lib/posts';
+
+const posts = await getPosts();
+---
+
+<Base title="Writing / Kacper Noniewicz" description="Notes on industrial software, self-hosted infrastructure and AI systems.">
+  <div class="py-16 pb-20">
+    <p class="mb-10"><MonoLink href="/">&larr; Home</MonoLink></p>
+
+    <div class="mb-12 pb-8 border-b border-(--color-border)">
+      <p class="text-[0.8125rem] text-text-muted mb-3">Writing</p>
+      <h1 class="font-serif text-[clamp(2.25rem,5vw,3.25rem)] font-normal tracking-[-0.015em] leading-[1.08]">Blog</h1>
+    </div>
+
+    {posts.length === 0 && <p class="text-text-secondary">Nothing here yet.</p>}
+
+    <div class="max-w-180">
+      {posts.map((post) => (
+        <a href={`/blog/${post.id}/`} class="block py-6 border-b border-border-subtle no-underline group">
+          <p class="text-[0.8125rem] text-text-muted mb-2">
+            {formatDate(post.data.date)}{post.data.draft && ' · draft'}
+          </p>
+          <h2 class="font-serif text-[1.375rem] leading-snug mb-1 group-hover:text-(--color-accent) transition-colors">{post.data.title}</h2>
+          <p class="text-[0.9375rem] text-text-secondary mb-3">{post.data.description}</p>
+          <TagList tags={post.data.tags} />
+        </a>
+      ))}
+    </div>
+
+    <p class="mt-8"><MonoLink href="/rss.xml">RSS</MonoLink></p>
+  </div>
+</Base>

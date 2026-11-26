@@ -1,57 +1,78 @@
 [
   {
-    "slug": "korpus",
-    "name": "Korpus",
-    "state": "Public",
+    "slug": "sigi",
+    "name": "SIGI",
+    "state": "Gold, Agrarfuchs 2026 / Work",
     "featured": true,
-    "url": null,
-    "repo": "https://github.com/knoniewicz/korpus",
-    "summary": "Go service that owns the canonical write path. Validates events against JSON Schemas, persists to Postgres, handles FK-aware retries.",
+    "listed": true,
+    "url": "https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-preistr-ger",
+    "repo": null,
+    "summary": "Award-winning AI service assistant at Schauer Agrotronic. A self-hosted model that reads live machine data over MCP and answers from our manuals, so support starts from the machine's real state instead of a description. I built most of it.",
     "labels": [
-      "Go",
-      "Postgres",
-      "Redis",
-      "JSON Schema"
+      "LLM",
+      "RAG",
+      "MCP",
+      "Self-hosted"
     ],
-    "signal": "Single write boundary with explicit contracts."
+    "signal": "Gold at the Agrarfuchs innovation award 2026, work efficiency and workplace quality."
   },
   {
-    "slug": "pularis",
-    "name": "Pularis",
-    "state": "Public",
-    "featured": true,
-    "url": null,
-    "repo": "https://github.com/knoniewicz/pularis",
-    "summary": "Stateless Go polling adapter. Config-driven HTTP fetcher that transforms API responses into Redis events. No persistence inside.",
-    "labels": [
-      "Go",
-      "Redis",
-      "TOML",
-      "MIT"
-    ],
-    "signal": "Fetch, transform, emit. Stateless by design."
-  },
-  {
-    "slug": "kor",
-    "name": "Kor",
-    "state": "Active development",
+    "slug": "simmer",
+    "name": "Simmer",
+    "state": "Release planned",
     "featured": true,
     "url": null,
     "repo": null,
-    "summary": "Minimal Go TCP message router for Anima. Services register handlers, publish events, and make request/response calls through a compact framed protocol.",
+    "draft": true,
+    "summary": "Replacement software for the Monsieur Cuisine Connect kitchen robot: tested motor safety, a phone companion, Home Assistant and an API for agents.",
+    "labels": [
+      "Kotlin",
+      "Android",
+      "MCP",
+      "Home Assistant"
+    ],
+    "signal": "A closed appliance, opened up."
+  },
+  {
+    "slug": "veles",
+    "name": "Veles",
+    "state": "Release planned",
+    "featured": true,
+    "url": null,
+    "repo": null,
+    "draft": true,
+    "summary": "A memory store for AI agents that maintains itself: probation for inferred facts, checked writes and nightly tidying, in one Go binary and one SQLite file.",
     "labels": [
       "Go",
-      "TCP",
-      "Pub/Sub",
-      "JSON"
+      "SQLite",
+      "FTS5",
+      "Agents"
     ],
-    "signal": "Small transport, explicit service boundaries."
+    "signal": "Memory that curates itself through use."
+  },
+  {
+    "slug": "kor-stack",
+    "name": "Kor, Korpus, Kron",
+    "state": "Retired",
+    "featured": true,
+    "listed": false,
+    "url": null,
+    "href": "/projects/kor/",
+    "repo": null,
+    "summary": "An event-driven data spine in Go: a small TCP message router, an acknowledged-write store on SQLite and a sandboxed Lua automation host. It ran my personal infrastructure until November 2026, when Bober replaced it.",
+    "labels": [
+      "Go",
+      "SQLite",
+      "Lua",
+      "Distributed systems"
+    ],
+    "signal": "Three focused open-source projects."
   },
   {
     "slug": "bober",
     "name": "Bober",
     "state": "Active development",
-    "featured": false,
+    "featured": true,
     "url": null,
     "repo": null,
     "summary": "Small coding agent in one Go process. Speaks the Agent Client Protocol, runs a model loop with two basic tools, and everything else is a Lua extension.",
@@ -64,10 +85,74 @@
     "signal": "Minimal core, features as extensions."
   },
   {
+    "slug": "kor",
+    "name": "Kor",
+    "state": "Retired",
+    "featured": false,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/kor",
+    "summary": "Small Go TCP message router. Services register handlers, publish events, and call each other by name through a compact framed protocol.",
+    "labels": [
+      "Go",
+      "TCP",
+      "Pub/Sub",
+      "MIT"
+    ],
+    "signal": "Small transport, explicit service boundaries."
+  },
+  {
+    "slug": "korpus",
+    "name": "Korpus",
+    "state": "Retired",
+    "featured": false,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/korpus",
+    "summary": "Single writer for my personal-data spine. Validates records against JSON Schemas, stores them in SQLite, acknowledges a write only after commit.",
+    "labels": [
+      "Go",
+      "SQLite",
+      "JSON Schema",
+      "AGPL-3.0"
+    ],
+    "signal": "One write boundary, acked writes, safe retries."
+  },
+  {
+    "slug": "kron",
+    "name": "Kron",
+    "state": "Retired",
+    "featured": false,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/kron",
+    "summary": "Go host for sandboxed Lua connectors and automations, triggered by time or by an event, with a run record for every execution.",
+    "labels": [
+      "Go",
+      "Lua",
+      "Kor",
+      "MIT"
+    ],
+    "signal": "Automations as small Lua files in git."
+  },
+  {
+    "slug": "pularis",
+    "name": "Pularis",
+    "state": "Public",
+    "featured": false,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/pularis",
+    "summary": "Stateless Go polling adapter. Config-driven HTTP fetcher that transforms API responses into Redis events. No persistence inside.",
+    "labels": [
+      "Go",
+      "Redis",
+      "TOML",
+      "MIT"
+    ],
+    "signal": "Fetch, transform, emit. Stateless by design."
+  },
+  {
     "slug": "futura",
     "name": "Futura",
     "state": "Earlier work",
-    "featured": true,
+    "featured": false,
     "url": null,
     "repo": null,
     "summary": "Diploma project. My scope was the ML pipeline: Python/Jupyter with TA-Lib indicators, RFE feature selection, LightGBM classifier for next-day stock trends, MongoDB writeback.",
