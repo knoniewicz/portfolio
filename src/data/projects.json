@@ -1,41 +1,94 @@
 [
   {
-    "slug": "korpus",
-    "name": "Korpus",
-    "state": "Public",
+    "slug": "sigi",
+    "name": "SIGI",
+    "state": "Gold, Agrarfuchs 2026 / Work",
+    "featured": true,
+    "listed": true,
+    "url": "https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-preistr-ger",
+    "repo": null,
+    "summary": "Award-winning AI service assistant at Schauer Agrotronic. A self-hosted model that reads live machine data over MCP and answers from our manuals, so support starts from the machine's real state instead of a description. I built most of it.",
+    "labels": [
+      "LLM",
+      "RAG",
+      "MCP",
+      "Self-hosted"
+    ],
+    "signal": "Gold at Agrarfuchs 2026."
+  },
+  {
+    "slug": "simmer",
+    "name": "Simmer",
+    "state": "Release planned",
     "featured": true,
     "url": null,
-    "repo": "https://github.com/knoniewicz/korpus",
-    "summary": "Single writer for my personal-data spine. Validates records against JSON Schemas, stores them in SQLite, acknowledges a write only after commit.",
+    "repo": null,
+    "draft": true,
+    "summary": "Replacement software for the Monsieur Cuisine Connect kitchen robot: tested motor safety, a phone companion, Home Assistant and an API for agents.",
+    "labels": [
+      "Kotlin",
+      "Android",
+      "MCP",
+      "Home Assistant"
+    ],
+    "signal": "A closed appliance, opened up."
+  },
+  {
+    "slug": "veles",
+    "name": "Veles",
+    "state": "Release planned",
+    "featured": true,
+    "url": null,
+    "repo": null,
+    "draft": true,
+    "summary": "A memory store for AI agents that maintains itself: probation for inferred facts, checked writes and nightly tidying, in one Go binary and one SQLite file.",
     "labels": [
       "Go",
       "SQLite",
-      "JSON Schema",
-      "AGPL-3.0"
+      "FTS5",
+      "Agents"
     ],
-    "signal": "One write boundary, acked writes, safe retries."
+    "signal": "Memory that curates itself through use."
   },
   {
-    "slug": "pularis",
-    "name": "Pularis",
-    "state": "Public",
+    "slug": "kor-stack",
+    "name": "Kor, Korpus, Kron",
+    "state": "Public / Open source",
     "featured": true,
+    "listed": false,
     "url": null,
-    "repo": "https://github.com/knoniewicz/pularis",
-    "summary": "Stateless Go polling adapter. Config-driven HTTP fetcher that transforms API responses into Redis events. No persistence inside.",
+    "href": "/projects/kor/",
+    "repo": null,
+    "summary": "An event-driven data spine in Go: a small TCP message router, an acknowledged-write store on SQLite and a sandboxed Lua automation host. Extracted from my personal infrastructure and released as three standalone projects.",
     "labels": [
       "Go",
-      "Redis",
-      "TOML",
-      "MIT"
+      "SQLite",
+      "Lua",
+      "Distributed systems"
     ],
-    "signal": "Fetch, transform, emit. Stateless by design."
+    "signal": "Three focused open-source projects."
+  },
+  {
+    "slug": "bober",
+    "name": "Bober",
+    "state": "Active development",
+    "featured": true,
+    "url": null,
+    "repo": null,
+    "summary": "Small coding agent in one Go process. Speaks the Agent Client Protocol, runs a model loop with two basic tools, and everything else is a Lua extension.",
+    "labels": [
+      "Go",
+      "Lua",
+      "ACP",
+      "Agents"
+    ],
+    "signal": "Minimal core, features as extensions."
   },
   {
     "slug": "kor",
     "name": "Kor",
     "state": "Public",
-    "featured": true,
+    "featured": false,
     "url": null,
     "repo": "https://github.com/knoniewicz/kor",
     "summary": "Small Go TCP message router. Services register handlers, publish events, and call each other by name through a compact framed protocol.",
@@ -46,6 +99,22 @@
       "MIT"
     ],
     "signal": "Small transport, explicit service boundaries."
+  },
+  {
+    "slug": "korpus",
+    "name": "Korpus",
+    "state": "Public",
+    "featured": false,
+    "url": null,
+    "repo": "https://github.com/knoniewicz/korpus",
+    "summary": "Single writer for my personal-data spine. Validates records against JSON Schemas, stores them in SQLite, acknowledges a write only after commit.",
+    "labels": [
+      "Go",
+      "SQLite",
+      "JSON Schema",
+      "AGPL-3.0"
+    ],
+    "signal": "One write boundary, acked writes, safe retries."
   },
   {
     "slug": "kron",
@@ -64,60 +133,26 @@
     "signal": "Automations as small Lua files in git."
   },
   {
-    "slug": "bober",
-    "name": "Bober",
-    "state": "Active development",
+    "slug": "pularis",
+    "name": "Pularis",
+    "state": "Public",
     "featured": false,
     "url": null,
-    "repo": null,
-    "summary": "Small coding agent in one Go process. Speaks the Agent Client Protocol, runs a model loop with two basic tools, and everything else is a Lua extension.",
+    "repo": "https://github.com/knoniewicz/pularis",
+    "summary": "Stateless Go polling adapter. Config-driven HTTP fetcher that transforms API responses into Redis events. No persistence inside.",
     "labels": [
       "Go",
-      "Lua",
-      "ACP",
-      "Agents"
+      "Redis",
+      "TOML",
+      "MIT"
     ],
-    "signal": "Minimal core, features as extensions."
-  },
-  {
-    "slug": "veles",
-    "name": "Veles",
-    "state": "Release planned",
-    "featured": false,
-    "url": null,
-    "repo": null,
-    "draft": true,
-    "summary": "A memory store for AI agents that maintains itself: probation for inferred facts, checked writes and nightly tidying, in one Go binary and one SQLite file.",
-    "labels": [
-      "Go",
-      "SQLite",
-      "FTS5",
-      "Agents"
-    ],
-    "signal": "Memory that curates itself through use."
-  },
-  {
-    "slug": "simmer",
-    "name": "Simmer",
-    "state": "Release planned",
-    "featured": false,
-    "url": null,
-    "repo": null,
-    "draft": true,
-    "summary": "Replacement software for the Monsieur Cuisine Connect kitchen robot: tested motor safety, a phone companion, Home Assistant and an API for agents.",
-    "labels": [
-      "Kotlin",
-      "Android",
-      "MCP",
-      "Home Assistant"
-    ],
-    "signal": "A closed appliance, opened up."
+    "signal": "Fetch, transform, emit. Stateless by design."
   },
   {
     "slug": "futura",
     "name": "Futura",
     "state": "Earlier work",
-    "featured": true,
+    "featured": false,
     "url": null,
     "repo": null,
     "summary": "Diploma project. My scope was the ML pipeline: Python/Jupyter with TA-Lib indicators, RFE feature selection, LightGBM classifier for next-day stock trends, MongoDB writeback.",

@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import MonoLink from '../../components/MonoLink.astro';
-import { projects } from '../../lib/projects';
+import { listed, projectHref } from '../../lib/projects';
 ---
 
 <Base title="Projects / Kacper Noniewicz" description="All projects by Kacper Noniewicz.">
@@ -15,13 +15,13 @@ import { projects } from '../../lib/projects';
     </div>
 
     <div>
-      {projects.map((project, i) => (
+      {listed.map((project, i) => (
         <ProjectCard
           name={project.name}
           state={project.state}
           summary={project.summary}
           labels={project.labels}
-          href={project.url || `/projects/${project.slug}/`}
+          href={projectHref(project)}
           external={!!project.url}
           first={i === 0}
         />

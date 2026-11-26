@@ -4,18 +4,28 @@ import SectionLabel from '../components/SectionLabel.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import TimelineItem from '../components/TimelineItem.astro';
 import MonoLink from '../components/MonoLink.astro';
-import { projects } from '../lib/projects';
+import { featured, projectHref } from '../lib/projects';
 import TagList from '../components/TagList.astro';
+
+// TODO(you): your real birthday, so the age stays right without edits.
+const born = new Date('2004-01-01');
+const now = new Date();
+const age = now.getFullYear() - born.getFullYear() - (now < new Date(now.getFullYear(), born.getMonth(), born.getDate()) ? 1 : 0);
 ---
 
-<Base title="Software Developer | Industrial Software, AI Infrastructure, Event-Driven Systems" description="Software developer building industrial software, AI infrastructure, and event-driven systems.">
+<Base title="Kacper Noniewicz | Software Developer, AI systems for real machines" description="Software developer building AI systems that work with real machines. Built most of SIGI, Gold at Agrarfuchs 2026.">
 
   <!-- Hero -->
   <section class="py-20 max-md:py-12 grid grid-cols-[1fr_260px] max-md:grid-cols-1 gap-16 max-md:gap-10 items-center border-b border-(--color-border)">
     <div>
       <span class="block font-mono text-[0.6875rem] uppercase tracking-widest text-text-muted mb-5">Software Developer</span>
       <h1 class="font-mono text-[clamp(2.5rem,6vw,3.5rem)] max-md:text-[2rem] font-medium tracking-tight leading-none mb-7 uppercase">Kacper<br />Noniewicz</h1>
-      <p class="text-[1.0625rem] text-text-secondary max-w-120 leading-relaxed">Industrial automation at work.<br />Personal infrastructure on my own time.</p>
+      <p class="text-[1.0625rem] text-text-secondary max-w-120 leading-relaxed">I build AI systems that work with real machines: self-hosted models, live device data over MCP, and the infrastructure underneath.</p>
+      <dl class="grid grid-cols-3 max-sm:grid-cols-1 gap-x-6 gap-y-4 mt-8 max-w-130">
+        <div><dt class="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">Award</dt><dd class="mt-1 text-sm font-semibold">Gold, Agrarfuchs 2026</dd></div>
+        <div><dt class="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">Shipping since</dt><dd class="mt-1 text-sm font-semibold">2022, full-time 2024</dd></div>
+        <div><dt class="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">Age</dt><dd class="mt-1 text-sm font-semibold">{age}</dd></div>
+      </dl>
       <div class="flex gap-6 mt-6 font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">
         <span>Schauer Agrotronic</span>
         <span class="relative before:content-['/'] before:absolute before:-left-4 before:text-border-subtle">Austria</span>
@@ -37,13 +47,13 @@ import TagList from '../components/TagList.astro';
     <div class="max-w-180 space-y-4">
 
       <p class="text-text-secondary">
-        I build software for industrial systems under real constraints: low-power embedded hardware, device integration over serial interfaces, and touch-first operation.
+        At Schauer Agrotronic I build software for barn equipment that has to work under real constraints: low-power embedded hardware, device integration over serial interfaces, and touch-first operation in a barn.
       </p>
       <p class="text-text-secondary">
-        At Schauer Agrotronic, I work across Angular and Node.js, led the migration from a legacy Angular version to the current stack, and focused heavily on application responsiveness.
+        I built most of <strong class="text-(--color-text)">SIGI</strong>, our AI service assistant, which won Gold at Agrarfuchs 2026: a self-hosted model, retrieval over our manuals, an MCP server for our controllers and an aggregator that gives the agent one endpoint for every device. I also led the migration of our touch interfaces from legacy Angular to the current stack, and mentored an intern along the way.
       </p>
       <p class="text-text-secondary">
-        Outside of work, I build self-hosted infrastructure and AI systems in Go and Python. My current AI work is fully self-directed, from architecture to implementation.
+        On my own time I build the same kind of systems for myself, in Go: a message router, a durable store and a sandboxed Lua automation host, all open source, plus an agent that runs my home infrastructure.
       </p>
 
       <TagList tags={["Polish", "German", "English"]} />
@@ -54,27 +64,21 @@ import TagList from '../components/TagList.astro';
   <section class="py-16 border-t border-(--color-border)" id="projects">
     <SectionLabel text="Projects" />
     <div>
-      {projects.filter(p => p.featured).slice(0, 3).map((project, i) => (
+      {featured.map((project, i) => (
         <ProjectCard
           name={project.name}
           state={project.state}
           summary={project.summary}
           labels={project.labels}
-          href={project.url || `/projects/${project.slug}/`}
+          href={projectHref(project)}
           external={!!project.url}
           first={i === 0}
         />
       ))}
     </div>
-    <a href="/projects/anima/" class="block mt-7 p-5 border-l-[3px] border-(--color-border) bg-bg-subtle no-underline hover:bg-(--color-bg-elevated) transition-colors">
-      <p class="text-sm text-text-secondary"><strong class="text-(--color-text)">Anima</strong> was my self-hosted, event-driven personal infrastructure. I retired it for Bober, which does the same with far fewer moving parts. Kor, Korpus and Kron were extracted from it.</p>
-      <span class="inline-block mt-3 font-mono text-xs uppercase tracking-[0.06em] text-text-muted border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">Read more about Anima</span>
-    </a>
-    {projects.length > 3 && (
-      <div class="mt-6">
-        <MonoLink href="/projects/">View all projects</MonoLink>
-      </div>
-    )}
+    <div class="mt-6">
+      <MonoLink href="/projects/">View all projects</MonoLink>
+    </div>
   </section>
 
   <!-- Experience -->
@@ -85,10 +89,10 @@ import TagList from '../components/TagList.astro';
           Built most of SIGI, Schauer Agrotronic's AI service assistant: a self-hosted model with retrieval over our documentation, an MCP server for SDU-X and an MCP aggregator that gives the agent one endpoint for all our devices. Mentored an intern on the project. <a href="https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-preistr-ger" target="_blank" rel="noopener noreferrer" class="border-b border-border-subtle hover:border-(--color-text)">Winners</a>
       </TimelineItem>
       <TimelineItem date="07/2024 – present" title="Software Developer" org="Schauer Agrotronic, Full-time">
-          Building control software for constrained hardware systems and internal AI tooling. Leading the migration from legacy Angular to the modern stack across the product line. Current AI work is owned end-to-end, from architecture to implementation.
+          Own our AI work end to end, from architecture to production: built most of SIGI (above). Led the migration of the product line's touch interfaces from legacy Angular to the current stack. Control software for constrained hardware.
       </TimelineItem>
       <TimelineItem date="06/2022 – 06/2024" title="Software Developer" org="Schauer Agrotronic, Part-time">
-          Started part-time alongside school. Built and maintained Angular-based touch interfaces, with a strong focus on responsiveness and usability in real operating environments.
+          Started part-time alongside school. Built and maintained the Angular touch interfaces on our controllers, with a focus on responsiveness on low-power hardware.
       </TimelineItem>
       <TimelineItem date="04/2022" title="Accenture Hackathon Vienna" org="2nd Place" last>
         2nd place. Built and pitched under time pressure in a team competition.
