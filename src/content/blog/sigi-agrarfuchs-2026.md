@@ -43,17 +43,15 @@ procedure for that machine.
 The hardest part was the images. Our manuals are full of them: wiring diagrams, exploded views,
 photos of the right valve or sensor. Text-only retrieval simply skips half of what a technician
 actually needs, so doing something smart with the images is the part I spent the most time on,
-trying approaches and benchmarking them against each other.
-
-TODO(you): one line on what worked best for the images, if you can share it.
+trying approaches and benchmarking them against each other. What we ended up with stays in-house.
 
 Customer service reports close the loop: what SIGI stated gets compared with what the service
 report later recorded, and that feedback goes back into the system.
 
 ### Live machine data through MCP
 
-SDU-X is the control hardware inside our products, from HorseX in horse stables to StrawX for
-automatic straw littering and XGuard. Every one of these devices can be queried directly on the
+SDU-X is the control hardware inside our products: HorseX in horse stables, StrawX for automatic
+straw littering, CowGuard for the manure scrapers in cattle barns, and more. Every one of these devices can be queried directly on the
 device itself. The model talks to them through MCP (Model Context Protocol): I wrote the MCP server
 for SDU-X, so the assistant reads live state and fault data from the machine instead of guessing
 from a description.
@@ -67,7 +65,8 @@ aggregator. The agent's setup doesn't change.
 
 The aggregator also became an internship project. I mentored an intern on the team: I showed him
 the infrastructure, and as his internship work he wrote a first prototype of the aggregator. It
-was rough, as first prototypes are, but it proved the idea.
+was rough, as first prototypes are, but it proved the idea. The aggregator SIGI runs on today is my
+heavy rewrite of it, built on that prototype.
 
 ## What SIGI does
 

@@ -60,7 +60,8 @@ closed appliance and became something I could make fit how I actually cook.
 
 **The win is the whole loop, not the app.** Before, cooking meant researching recipes, planning the
 meals, checking what was already at home and then shopping for the rest. Now I pick what I want in
-Simmer, add it to the meal plan, and the grocery list is in Home Assistant seconds later. On a day
+Simmer, add it to the meal plan, and the grocery list shows up in Home Assistant seconds later as a
+to-do list that syncs both ways. On a day
 with no ideas, I ask an agent to find something in the recipe library.
 
 **Agents can carry a multi-part project.** Most of the code was written with coding agents. My job
