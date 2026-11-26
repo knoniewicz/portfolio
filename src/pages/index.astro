@@ -6,13 +6,27 @@ import TimelineItem from '../components/TimelineItem.astro';
 import MonoLink from '../components/MonoLink.astro';
 import { featured, projectHref } from '../lib/projects';
 import TagList from '../components/TagList.astro';
+import { age, yearsWorking, yearsFullTime } from '../lib/profile';
 
-const born = new Date('2004-05-24');
-const now = new Date();
-const age = now.getFullYear() - born.getFullYear() - (now < new Date(now.getFullYear(), born.getMonth(), born.getDate()) ? 1 : 0);
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Kacper Noniewicz',
+  url: 'https://noniewicz.eu',
+  jobTitle: 'Software Developer',
+  worksFor: { '@type': 'Organization', name: 'Schauer Agrotronic' },
+  address: { '@type': 'PostalAddress', addressCountry: 'AT' },
+  alumniOf: { '@type': 'EducationalOrganization', name: 'HTBLA Grieskirchen' },
+  award: ['Agrarfuchs 2026, Gold (work efficiency category), for SIGI', 'Accenture Hackathon Vienna 2022, 2nd place'],
+  knowsAbout: ['LLMs', 'RAG', 'MCP', 'Go', 'TypeScript', 'Angular', 'Kotlin', 'Python', 'SQLite', 'Embedded systems', 'Event-driven systems'],
+  knowsLanguage: ['Polish', 'German', 'English'],
+  sameAs: ['https://github.com/knoniewicz', 'https://www.linkedin.com/in/noniewicz'],
+};
 ---
 
 <Base title="Kacper Noniewicz | Software Developer, AI systems for real machines" description="Software developer building AI systems that work with real machines. Built most of SIGI, Gold at Agrarfuchs 2026.">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(person)} />
+
 
   <!-- Hero -->
   <section class="py-20 max-md:py-12 grid grid-cols-[1fr_260px] max-md:grid-cols-1 gap-16 max-md:gap-10 items-center border-b border-(--color-border)">
@@ -21,7 +35,7 @@ const age = now.getFullYear() - born.getFullYear() - (now < new Date(now.getFull
       <h1 class="font-mono text-[clamp(2.5rem,6vw,3.5rem)] max-md:text-[2rem] font-medium tracking-tight leading-none mb-7 uppercase">Kacper<br />Noniewicz</h1>
       <p class="text-[1.0625rem] text-text-secondary max-w-120 leading-relaxed">I build AI systems that work with real machines: self-hosted models, live device data over MCP, and the infrastructure underneath.</p>
       <dl class="grid grid-cols-2 gap-x-6 gap-y-4 mt-8 max-w-90">
-        <div><dt class="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">Shipping since</dt><dd class="mt-1 text-sm font-semibold">2022, full-time 2024</dd></div>
+        <div><dt class="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">Experience</dt><dd class="mt-1 text-sm font-semibold">{yearsWorking}+ years, {yearsFullTime}+ full-time</dd></div>
         <div><dt class="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">Age</dt><dd class="mt-1 text-sm font-semibold">{age}</dd></div>
       </dl>
       <div class="flex gap-6 mt-6 font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-text-muted">
