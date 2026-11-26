@@ -23,7 +23,9 @@ const awardUrl = 'https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-prei
 const projects = [
   { id: 'sigi', name: 'SIGI', href: awardUrl, status: 'gold · 2026', line: "Self-hosted AI service assistant that reads the machine's live state over MCP before answering." },
   { id: 'bober', name: 'Bober', href: '/projects/bober/', status: 'daily', line: 'My own agent. One Go process, two tools, everything else in Lua. Also runs my home infrastructure.' },
-  { id: 'spine', name: 'kor · korpus · kron', parts: [['kor', '/projects/kor/'], ['korpus', '/projects/korpus/'], ['kron', '/projects/kron/']], status: 'retired', line: 'Router, acked-write store and Lua automations. Ran my home infrastructure until Bober took over.' },
+  { id: 'kor', name: 'Kor', href: '/projects/kor/', status: 'retired', line: 'A small TCP message router. Services register handlers, publish events and call each other by name.' },
+  { id: 'korpus', name: 'Korpus', href: '/projects/korpus/', status: 'retired', line: 'The single writer. Validates every record against a JSON Schema and only acks once SQLite has committed it.' },
+  { id: 'kron', name: 'Kron', href: '/projects/kron/', status: 'retired', line: 'Sandboxed Lua connectors and automations, triggered by time or by an event.' },
   { id: 'pularis', name: 'Pularis', href: '/projects/pularis/', status: 'open source', line: 'Polls HTTP APIs and publishes events. Describe a source in one TOML file.' },
   { id: 'anima', name: 'Anima', href: '/projects/anima/', status: 'retired', line: 'My old self-hosted platform. Too many services for one person, replaced by Bober.' },
   { id: 'futura', name: 'Futura', href: '/projects/futura/', status: '2024', line: 'Diploma project: an end-to-end ML pipeline for next-day stock direction.' },
@@ -43,19 +45,13 @@ const posts = await getPosts();
 
     <main class="t">
       <h1 class="rise" style="--i:1">Hi, I'm Kacper. I build AI that works with real machines.</h1>
-      <p class="rise" style="--i:2">By day I'm a software developer at Schauer Agrotronic, where the software runs on barn equipment: low-power hardware, serial devices, touch screens in a stable. I built most of <strong>SIGI</strong>, our self-hosted service assistant that reads the machine's live state before answering. It won <a class="ul" href={awardUrl}>Gold at Agrarfuchs 2026</a>.</p>
-      <p class="rise" style="--i:3">After work I build the same kind of thing for myself, in Go: a small agent I use every day for code and for running my home infrastructure. Some of what I build is <a class="ul" href="https://github.com/knoniewicz">open source</a>.</p>
+      <p class="rise" style="--i:2">By day I'm a software developer at Schauer Agrotronic, where the software runs on barn equipment: low-power hardware, serial devices, <span class="tip" data-peek="barn">touch screens in a stable</span>. I built most of <strong class="tip" data-peek="sigi">SIGI</strong>, our self-hosted service assistant that reads the machine's live state before answering. It won <a class="ul" href={awardUrl}>Gold at Agrarfuchs 2026</a>.</p>
+      <p class="rise" style="--i:3">After work I build the same kind of thing for myself, in Go: <span class="tip" data-peek="bober">a small agent I use every day</span> for code and for running my home infrastructure. Some of what I build is <a class="ul" href="https://github.com/knoniewicz">open source</a>.</p>
 
       <section class="proj" id="projects">
         <span class="glide" aria-hidden="true"></span>
         <small class="l rise" style="--i:4">projects</small>
-        {projects.map((p, n) => p.parts ? (
-          <div class="p rise" data-peek={p.id} style={`--i:${n + 4}`}>
-            <h2>{p.parts.map(([n, h], i) => <>{i > 0 && " · "}<a href={h}>{n}</a></>)}</h2>
-            <i>{p.status}</i>
-            <span>{p.line}</span>
-          </div>
-        ) : (
+        {projects.map((p, n) => (
           <a class="p rise" data-peek={p.id} style={`--i:${n + 4}`} href={p.href}>
             <h2>{p.name}</h2>
             <i>{p.status}<b aria-hidden="true">→</b></i>
@@ -69,16 +65,16 @@ const posts = await getPosts();
       <div id="experience">
         <small class="l">work</small>
         <ul>
-          <li>Schauer Agrotronic<i>2022 – now</i></li>
-          <li>HTBLA Grieskirchen<i>2019 – 2024</i></li>
-          <li>Accenture Hackathon, 2nd<i>2022</i></li>
+          <li data-peek="schauer">Schauer Agrotronic<i>2022 – now</i></li>
+          <li data-peek="htbla">HTBLA Grieskirchen<i>2019 – 2024</i></li>
+          <li data-peek="hack">Accenture Hackathon, 2nd<i>2022</i></li>
         </ul>
       </div>
       {posts.length > 0 && (
         <div>
           <small class="l">writing</small>
           <ul>
-            {posts.map((post) => <li><a class="ul" href={`/blog/${post.id}/`}>{post.data.title}</a></li>)}
+            {posts.map((post) => <li data-peek={`post-${post.id}`}><a class="ul" href={`/blog/${post.id}/`}>{post.data.title}</a></li>)}
           </ul>
         </div>
       )}
@@ -98,10 +94,24 @@ const posts = await getPosts();
 <span class="dim">shell_command</span>  go test ./core/...
 <span class="dim">apply_patch</span>    core/loop.go  <span class="hi">+4 −2</span>
 <span class="dim">shell_command</span>  go test ./core/...  <span class="hi">ok</span></pre></div>
-    <div data-for="spine"><pre><span class="dim">service →</span> kor <span class="dim">korpus.write</span>
-<span class="dim">       →</span> json schema
-<span class="dim">       →</span> sqlite commit
-<span class="dim">       →</span> <span class="hi">ack</span> + korpus.&lt;type&gt;.written</pre></div>
+    <div data-for="kor"><pre><span class="dim">→</span> HELLO  korpus
+<span class="dim">→</span> HANDLE korpus.write
+<span class="dim">←</span> REQ    korpus.write <span class="dim">#41</span>
+<span class="dim">→</span> RES    <span class="dim">#41</span> <span class="hi">ok</span>
+<span class="dim">→</span> PUB    korpus.job.written</pre><small>length-prefixed TCP frames, nine verbs</small></div>
+    <div data-for="korpus"><pre><span class="dim">service →</span> korpus.write
+<span class="dim">        →</span> json schema
+<span class="dim">        →</span> sqlite commit
+<span class="dim">        →</span> <span class="hi">ack</span> + &lt;type&gt;.written</pre><small>unknown_type / invalid fail before the db is touched</small></div>
+    <div data-for="kron"><pre><span class="hi">automation</span> "morning-brief" &#123;
+  at = <span class="hi">"06:00"</span>, catchup = true,
+  run = <span class="hi">function</span>(ctx) ... <span class="hi">end</span>,
+&#125;</pre><small>no filesystem, no os, a timeout on every run</small></div>
+    <div data-for="barn"><b class="medal sm">barn equipment</b><ol><li>low-power embedded hardware</li><li>devices on serial interfaces</li><li class="hi">touch-first operation</li></ol></div>
+    <div data-for="schauer"><b class="medal sm">Schauer Agrotronic</b><ol class="evo"><li><span class="dim">06/2022</span> part-time, alongside school: Angular touch UIs</li><li><span class="dim">07/2024</span> full-time: AI end to end, the Angular migration</li><li class="hi"><span class="dim">2026</span> SIGI, Gold at Agrarfuchs</li></ol></div>
+    <div data-for="htbla"><b class="medal sm">HTBLA Grieskirchen</b><small>Informatik · technical diploma · EQF level 5</small><ol class="evo"><li>diploma project: <span class="hi">Futura</span>, an ML pipeline</li></ol></div>
+    <div data-for="hack"><b class="medal">2nd</b><small>Accenture Hackathon Vienna · 04/2022</small><ol class="evo"><li>built and pitched under time pressure, as a team</li></ol></div>
+    {posts.map((post) => <div data-for={`post-${post.id}`}><small class="date">{post.data.date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}{post.data.draft && " · draft"}</small><p class="desc">{post.data.description}</p></div>)}
     <div data-for="pularis"><pre>name = <span class="hi">"example_source"</span>
 endpoint = <span class="hi">"https://api.example.com/status"</span>
 poll_interval_seconds = 15
@@ -151,27 +161,34 @@ publish_when = <span class="hi">"state != ''"</span></pre></div>
     }
 
 
-    // A preview card trails the cursor over the project list, on a spring, leaning with speed.
+    // A preview card trails the cursor wherever something has more to show (data-peek):
+    // projects, the intro, work history, posts. It rides a spring and leans with speed.
     const peek = document.getElementById("peek");
-    if (list && peek) {
-      let tx = 0, ty = 0, x = 0, y = 0, vx = 0, active = false, run = 0;
+    if (peek) {
+      let tx = 0, ty = 0, x = 0, y = 0, vx = 0, active = false, run = 0, hideT = 0;
       const step = () => {
         const nx = x + (tx - x) * 0.16, ny = y + (ty - y) * 0.16;
         vx = vx * 0.8 + (nx - x) * 0.2; x = nx; y = ny;
-        peek.style.transform = `translate(${x + 24}px, ${y - 30}px) rotate(${Math.max(-8, Math.min(8, vx * 0.6))}deg)`;
+        const w = peek.offsetWidth, h = peek.offsetHeight;
+        const px = x + 24 + w > innerWidth - 12 ? x - w - 24 : x + 24;   // flip left near the right edge
+        const py = Math.min(Math.max(12, y - 30), innerHeight - h - 12);
+        peek.style.transform = `translate(${px}px, ${py}px) rotate(${Math.max(-8, Math.min(8, vx * 0.6))}deg)`;
         run = active || Math.abs(tx - x) > 0.5 ? requestAnimationFrame(step) : 0;
       };
-      list.addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; if (!run) run = requestAnimationFrame(step); });
-      list.querySelectorAll<HTMLElement>("[data-peek]").forEach((row) => {
-        row.addEventListener("pointerenter", (e) => {
+      addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; if (active && !run) run = requestAnimationFrame(step); }, { passive: true });
+      document.querySelectorAll<HTMLElement>("[data-peek]").forEach((el) => {
+        el.addEventListener("pointerenter", (e) => {
+          clearTimeout(hideT);
           if (!active) { x = tx = e.clientX; y = ty = e.clientY; }
           active = true;
-          peek.querySelectorAll<HTMLElement>("[data-for]").forEach((c) => c.classList.toggle("on", c.dataset.for === row.dataset.peek));
+          peek.querySelectorAll<HTMLElement>("[data-for]").forEach((c) => c.classList.toggle("on", c.dataset.for === el.dataset.peek));
           peek.classList.add("on");
           if (!run) run = requestAnimationFrame(step);
         });
+        el.addEventListener("pointerleave", () => {
+          hideT = window.setTimeout(() => { active = false; peek.classList.remove("on"); }, 60);
+        });
       });
-      list.addEventListener("pointerleave", () => { active = false; peek.classList.remove("on"); });
     }
   }
 
@@ -216,6 +233,15 @@ publish_when = <span class="hi">"state != ''"</span></pre></div>
   .peek .hi { color: var(--color-accent); }
   .peek small { display: block; color: var(--color-text-muted); font-size: 12px; margin-top: 4px; }
   .peek .medal { font: 400 34px/1 var(--font-serif); color: var(--color-accent); }
+  .peek .medal.sm { font-size: 22px; color: var(--color-text); }
+  .peek .date { margin: 0 0 6px; }
+  .peek .desc { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-text-secondary); }
+  .peek ol.evo li::before { content: "·"; }
+  .tip { cursor: help; background: radial-gradient(circle, var(--color-text-muted) .7px, transparent 1px) 0 100% / 4px 2px repeat-x; padding-bottom: 1px; transition: color .25s, background-size .3s; }
+  .tip:hover { color: var(--color-text); background-image: radial-gradient(circle, var(--color-accent) .8px, transparent 1.1px); }
+  .side li[data-peek] { cursor: default; transition: color .25s, transform .4s cubic-bezier(.2,.7,.2,1); }
+  .side li[data-peek]:hover { color: var(--color-text); transform: translateX(4px); }
+  .side li[data-peek]:hover i { color: var(--color-accent); }
   .peek ol { list-style: none; margin: 12px 0 0; padding: 0; counter-reset: s; }
   .peek ol li { padding-left: 18px; position: relative; line-height: 1.8; }
   .peek ol li::before { content: "↓"; position: absolute; left: 0; color: var(--color-text-muted); }
