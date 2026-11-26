@@ -29,8 +29,9 @@ description. "It shows an error and the valve doesn't open" is where a diagnosis
 questions that follow are mostly the machine's own data, asked for one item at a time over the
 phone.
 
-SIGI is built for everyone on those paths: farmers, customer service and technicians all get the
-same assistant, looking at the same live data.
+SIGI starts with support: a case is opened in SIGI while the customer is still on the phone, and it
+checks the manuals and the machine's live data during the call. Part of our support team uses it
+today. The goal is to give the same assistant to technicians and, eventually, to customers.
 
 ## How it is built
 
@@ -51,9 +52,9 @@ photos of the right valve or sensor. Text-only retrieval silently drops half of 
 actually needs, so making the images useful is where I spent most of my time, building candidate
 approaches and benchmarking them against each other. What we ended up with stays in-house.
 
-Customer service reports close the loop. What SIGI said in a case is compared with what the service
-report later recorded as the actual cause, and that feedback goes back into the system. Every
-resolved case makes the next answer better grounded.
+Support closes the loop. When support confirms the fix for a case, SIGI learns it: what it said is
+checked against what the service report recorded as the actual cause, and the confirmed fix goes
+back into the system. The next similar case should go faster.
 
 ### Live machine data through MCP
 

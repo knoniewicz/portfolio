@@ -7,8 +7,7 @@ import MonoLink from '../components/MonoLink.astro';
 import { featured, projectHref } from '../lib/projects';
 import TagList from '../components/TagList.astro';
 
-// TODO(you): your real birthday, so the age stays right without edits.
-const born = new Date('2004-01-01');
+const born = new Date('2004-05-24');
 const now = new Date();
 const age = now.getFullYear() - born.getFullYear() - (now < new Date(now.getFullYear(), born.getMonth(), born.getDate()) ? 1 : 0);
 ---
