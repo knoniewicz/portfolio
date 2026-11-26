@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../ProjectPageHeader.astro';
+import ProjectSection from '../ProjectSection.astro';
+import ProjectList from '../ProjectList.astro';
+import ProjectProse from '../ProjectProse.astro';
+import TagList from '../TagList.astro';
+---
+
+<Base title="Veles / Kacper Noniewicz" description="A self-maintaining memory store for AI agents: one Go binary, one SQLite file, no approval queue.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader label="Go / SQLite / Release planned" title="Veles" intro="Long-term memory for my agents that maintains itself. Agents save facts, preferences, decisions and corrections; Veles decides what stays, what ages out and what gets merged, so nobody has to curate it. About 1,500 lines of Go, one SQLite file and roughly 17 MB of RAM." />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectList items={[
+          "Stores each memory under a subject and finds it with full-text search (SQLite FTS5, porter stemming)",
+          "Puts inferred memories on probation: one the user never stated outright expires after 60 days unless an agent uses it, and three uses make it permanent",
+          "Rejects bad writes at the door: oversized entries, anything containing a secret, and transient status such as \"tests passed\"; near-duplicates are caught and corrections replace what they supersede",
+          "Runs nightly upkeep: expiry, a rotating backup, and model-assisted splitting of overgrown subjects and merging of overlapping memories",
+          "Keeps every deletion in a 30-day trash, so an automatic decision can always be undone",
+        ]} />
+      </ProjectSection>
+
+      <ProjectSection title="Why it works without a reviewer">
+        <ProjectProse>
+          <p>Earlier versions asked me to approve every memory, and the queue was always the bottleneck. Veles replaces approval with feedback from use: what agents actually retrieve survives, and what nobody relies on quietly expires. A merge is only applied if the result keeps at least 80% of the specifics it replaces (numbers, versions, hostnames, paths, identifiers); otherwise it is dropped, so tidying can never blur a precise memory into a vague one.</p>
+          <p>Migrating my previous store shrank 476 rows (2.3 MB) to 155 active memories in 332 KB, and search returned the same first hit for every one of the ten queries I compared.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Go", "SQLite", "FTS5", "REST", "OpenAI-compatible LLM"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>The memory behind my agents, in daily use. Being prepared for an open-source release.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>

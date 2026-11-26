@@ -1,0 +1,19 @@
+---
+// Pages for projects that are not public yet. They are only built for dev and SHOW_DRAFTS=1
+// previews; at release, move the component to src/pages/projects/<slug>.astro and drop the draft flag.
+import { showDrafts } from '../../lib/posts';
+import Veles from '../../components/drafts/Veles.astro';
+import Krution from '../../components/drafts/Krution.astro';
+import Simmer from '../../components/drafts/Simmer.astro';
+import Period from '../../components/drafts/Period.astro';
+
+const pages = { veles: Veles, krution: Krution, simmer: Simmer, period: Period };
+
+export function getStaticPaths() {
+  if (!showDrafts) return [];
+  return ['veles', 'krution', 'simmer', 'period'].map((draft) => ({ params: { draft } }));
+}
+
+const Page = pages[Astro.params.draft as keyof typeof pages];
+---
+<Page />

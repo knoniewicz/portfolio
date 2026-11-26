@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectPageHeader from '../ProjectPageHeader.astro';
+import ProjectSection from '../ProjectSection.astro';
+import ProjectList from '../ProjectList.astro';
+import ProjectProse from '../ProjectProse.astro';
+import TagList from '../TagList.astro';
+---
+
+<Base title="Simmer / Kacper Noniewicz" description="Replacement software for the Monsieur Cuisine Connect kitchen robot, with tested motor safety, a phone companion and an API for agents.">
+  <div class="py-16 pb-20">
+    <ProjectPageHeader label="Kotlin / Android / MIT / Release planned" title="Simmer" intro="Replacement software for the Lidl Monsieur Cuisine Connect (SKMC 1100 A1) kitchen robot. A fast cooking app on the robot's own tablet, a companion web app the robot serves to your phone, and an API that lets agents plan meals without ever starting the motor." />
+
+    <div class="max-w-180">
+      <ProjectSection title="What it does">
+        <ProjectList items={[
+          "Guided cooking, manual mode, programs and the scale, on the robot's Android 6 tablet",
+          "Motor safety in a pure-Kotlin core with unit tests: no spinning with the lid open, ramped speeds for hot contents, faults that latch until acknowledged",
+          "A companion web app (Preact) for the meal plan, recipes, shopping list and prep, served by the robot itself",
+          "A REST API (38 operations) and an MCP server (17 tools), both under golden tests; anything an agent sends lands in review first",
+          "A Home Assistant integration: live cooking state, alerts, and the shopping list as a two-way to-do list",
+        ]} />
+      </ProjectSection>
+
+      <ProjectSection title="Why">
+        <ProjectProse>
+          <p>The hardware is good and the stock app is slow. Rooting the tablet turned a closed appliance into a device I could shape around how I actually cook: pick a recipe, add it to the plan, and the shopping list is already in Home Assistant.</p>
+          <p>The full story is in the <a href="/blog/simmer/">Simmer write-up</a>.</p>
+        </ProjectProse>
+      </ProjectSection>
+
+      <ProjectSection title="Stack">
+        <TagList tags={["Kotlin", "Android", "Preact", "MCP", "Home Assistant"]} />
+      </ProjectSection>
+
+      <ProjectSection title="Status">
+        <ProjectProse>
+          <p>Cooking with it daily. A fork of <a href="https://github.com/Wuki60/MrCuisineVibeConnect" target="_blank" rel="noopener noreferrer">MrCuisineVibeConnect</a> (MIT). Independent project, not affiliated with Lidl, SilverCrest or Hoyer.</p>
+        </ProjectProse>
+      </ProjectSection>
+    </div>
+  </div>
+</Base>

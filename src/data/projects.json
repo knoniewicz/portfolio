@@ -80,6 +80,73 @@
     "signal": "Minimal core, features as extensions."
   },
   {
+    "slug": "veles",
+    "name": "Veles",
+    "state": "Release planned",
+    "featured": false,
+    "url": null,
+    "repo": null,
+    "draft": true,
+    "summary": "A memory store for AI agents that maintains itself: probation for inferred facts, checked writes and nightly tidying, in one Go binary and one SQLite file.",
+    "labels": [
+      "Go",
+      "SQLite",
+      "FTS5",
+      "Agents"
+    ],
+    "signal": "Memory that curates itself through use."
+  },
+  {
+    "slug": "simmer",
+    "name": "Simmer",
+    "state": "Release planned",
+    "featured": false,
+    "url": null,
+    "repo": null,
+    "draft": true,
+    "summary": "Replacement software for the Monsieur Cuisine Connect kitchen robot: tested motor safety, a phone companion, Home Assistant and an API for agents.",
+    "labels": [
+      "Kotlin",
+      "Android",
+      "MCP",
+      "Home Assistant"
+    ],
+    "signal": "A closed appliance, opened up."
+  },
+  {
+    "slug": "krution",
+    "name": "Krution",
+    "state": "Release planned",
+    "featured": false,
+    "url": null,
+    "repo": null,
+    "draft": true,
+    "summary": "Read-mostly web UI for the Kor stack: Kron jobs and runs, Korpus records and a live tail of Kor events, in one Go binary.",
+    "labels": [
+      "Go",
+      "Kor",
+      "SSE",
+      "MIT"
+    ],
+    "signal": "See the whole stack at a glance."
+  },
+  {
+    "slug": "period",
+    "name": "period",
+    "state": "Release planned",
+    "featured": false,
+    "url": null,
+    "repo": null,
+    "draft": true,
+    "summary": "Tiny self-hosted cycle tracker: one stdlib-only Go binary, one JSON file, no accounts and no external calls.",
+    "labels": [
+      "Go",
+      "Self-hosted",
+      "Privacy"
+    ],
+    "signal": "Personal health data stays at home."
+  },
+  {
     "slug": "futura",
     "name": "Futura",
     "state": "Earlier work",
