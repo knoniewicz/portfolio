@@ -40,15 +40,14 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
   </head>
   <body class="leading-relaxed">
     {home ? <slot /> : <>
-    <header class="sticky top-0 z-50 bg-bg border-b border-(--color-border)">
-      <div class="max-w-275 mx-auto px-8 py-3.5 flex items-center justify-between">
-        <a href="/" class="font-mono text-[0.8125rem] font-medium uppercase tracking-[0.08em]">Kacper Noniewicz</a>
+    <header class="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-border-subtle">
+      <div class="max-w-275 mx-auto px-8 max-md:px-5 py-3.5 flex items-center justify-between">
+        <a href="/" class="font-serif text-lg">Kacper Noniewicz</a>
         <div class="flex items-center gap-8">
-          <nav class="hidden md:flex gap-6">
-            <a href="/#projects" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Projects</a>
-            <a href="/#experience" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Experience</a>
-            <a href="/blog/" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Blog</a>
-            <a href="/#contact" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Contact</a>
+          <nav class="flex gap-5">
+            <a href="/#projects" class="text-sm text-text-muted hover:text-(--color-text) transition-colors">projects</a>
+            <a href="/blog/" class="text-sm text-text-muted hover:text-(--color-text) transition-colors">writing</a>
+            <a href="/#contact" class="text-sm text-text-muted hover:text-(--color-text) transition-colors">contact</a>
           </nav>
         </div>
       </div>
@@ -56,8 +55,8 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
     <div class="max-w-275 mx-auto px-8 max-md:px-5">
       <slot />
     </div>
-    <footer class="border-t border-(--color-border) py-6">
-      <div class="max-w-275 mx-auto px-8 max-md:px-5 font-mono text-[0.6875rem] tracking-[0.04em] uppercase text-text-muted">
+    <footer class="border-t border-border-subtle py-6">
+      <div class="max-w-275 mx-auto px-8 max-md:px-5 text-[0.8125rem] text-text-muted">
         <span>&copy; {new Date().getFullYear()} Kacper Noniewicz</span>
       </div>
     </footer>

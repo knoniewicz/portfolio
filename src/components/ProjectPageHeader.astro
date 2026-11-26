@@ -7,13 +7,13 @@ interface Props {
 }
 const { label, title, intro, repo } = Astro.props;
 ---
-<a href="/#projects" class="inline-block font-mono text-[0.6875rem] uppercase tracking-[0.06em] text-text-muted mb-10 border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">&larr; Projects</a>
+<a href="/#projects" class="inline-block mb-10 text-sm text-text-muted underline decoration-border-subtle underline-offset-4 hover:text-(--color-text) hover:decoration-current transition-colors">&larr; Projects</a>
 
-<div class="mb-12 pb-8 border-b border-(--color-border)">
-  <p class="font-mono text-[0.6875rem] uppercase tracking-widest text-text-muted mb-4">{label}</p>
-  <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight leading-none mb-4">{title}</h1>
-  <p class="text-[1.0625rem] text-text-secondary max-w-150 leading-relaxed">{intro}</p>
+<div class="mb-12 pb-8 border-b border-border-subtle">
+  <p class="text-[0.8125rem] text-text-muted mb-3">{label}</p>
+  <h1 class="font-serif text-[clamp(2.25rem,5vw,3.25rem)] font-normal tracking-[-0.015em] leading-[1.08] mb-5">{title}</h1>
+  <p class="text-lg text-text-secondary max-w-150 leading-relaxed">{intro}</p>
   {repo && (
-    <a href={repo} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 font-mono text-xs uppercase tracking-[0.06em] text-text-muted pb-0.5 border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors">View on GitHub &rarr;</a>
+    <a href={repo} target="_blank" rel="noopener noreferrer" class="inline-block mt-5 text-sm text-(--color-text) underline decoration-(--color-accent) underline-offset-4">View on GitHub &rarr;</a>
   )}
 </div>

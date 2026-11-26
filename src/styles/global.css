@@ -11,7 +11,7 @@
   --color-text: #ecebe6;
   --color-text-secondary: #a8a69e;
   --color-text-muted: #7a7972;
-  --color-border: #ecebe6;
+  --color-border: #3a3936;
   --color-border-subtle: #2a2927;
   --color-accent: #e0b15c;
 }
@@ -44,26 +44,29 @@
   .post > * + * { margin-top: 1rem; }
   .post h2 {
     margin-top: 3rem;
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 1.25;
     letter-spacing: -0.01em;
     color: var(--color-text);
   }
   .post h3 {
     margin-top: 2rem;
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
     color: var(--color-text);
   }
   .post strong { color: var(--color-text); font-weight: 600; }
-  .post a { color: var(--color-text); border-bottom: 1px solid var(--color-border-subtle); }
-  .post a:hover { border-color: var(--color-text); }
+  .post a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 4px; }
+  .post a:hover { text-decoration-thickness: 2px; }
   .post ul { list-style: disc; padding-left: 1.25rem; }
   .post ol { list-style: decimal; padding-left: 1.25rem; }
   .post li + li { margin-top: 0.375rem; }
   .post blockquote {
     padding: 1rem 1.25rem;
-    border-left: 3px solid var(--color-border);
+    border-left: 2px solid var(--color-accent);
     background: var(--color-bg-subtle);
   }
   .post code { font-family: var(--font-mono); font-size: 0.875em; }
@@ -74,6 +77,7 @@
     border: 1px solid var(--color-border-subtle);
     font-size: 0.8125rem;
     line-height: 1.6;
+    border-radius: 4px;
   }
   .post pre code { font-size: inherit; }
   .post table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; display: block; overflow-x: auto; }

@@ -7,6 +7,6 @@ interface Props {
 }
 const { href, target, rel, class: cls = "" } = Astro.props;
 ---
-<a href={href} target={target} rel={rel} class:list={["font-mono text-xs uppercase tracking-[0.06em] text-text-muted pb-0.5 border-b border-transparent hover:text-(--color-text) hover:border-(--color-text) transition-colors", cls]}>
+<a href={href} target={target} rel={rel} class:list={["text-sm text-text-muted underline decoration-border-subtle underline-offset-4 hover:text-(--color-text) hover:decoration-current transition-colors", cls]}>
   <slot />
 </a>
