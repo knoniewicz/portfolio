@@ -15,7 +15,7 @@ export const yearsFullTime = yearsSince(startedFullTime);
 // Shared by the home sidebar and the CV, so both say the same thing.
 export const skills = [
   ['languages', 'Go, TypeScript, Python, Lua'],
-  ['AI', 'LLMs, RAG, MCP, self-hosted models'],
   ['web & UI', 'Angular, Node.js, touch-first UIs'],
   ['systems', 'SQLite, Nix, embedded and serial devices'],
+  ['AI', 'LLMs, RAG, MCP'],
 ] as const;
