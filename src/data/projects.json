@@ -53,13 +53,13 @@
   {
     "slug": "kor-stack",
     "name": "Kor, Korpus, Kron",
-    "state": "Public / Open source",
+    "state": "Retired",
     "featured": true,
     "listed": false,
     "url": null,
     "href": "/projects/kor/",
     "repo": null,
-    "summary": "An event-driven data spine in Go: a small TCP message router, an acknowledged-write store on SQLite and a sandboxed Lua automation host. Extracted from my personal infrastructure and released as three standalone projects.",
+    "summary": "An event-driven data spine in Go: a small TCP message router, an acknowledged-write store on SQLite and a sandboxed Lua automation host. It ran my personal infrastructure until November 2026, when Bober replaced it.",
     "labels": [
       "Go",
       "SQLite",
@@ -87,10 +87,10 @@
   {
     "slug": "kor",
     "name": "Kor",
-    "state": "Public",
+    "state": "Retired",
     "featured": false,
     "url": null,
-    "repo": "https://github.com/knoniewicz/kor",
+    "repo": null,
     "summary": "Small Go TCP message router. Services register handlers, publish events, and call each other by name through a compact framed protocol.",
     "labels": [
       "Go",
@@ -103,10 +103,10 @@
   {
     "slug": "korpus",
     "name": "Korpus",
-    "state": "Public",
+    "state": "Retired",
     "featured": false,
     "url": null,
-    "repo": "https://github.com/knoniewicz/korpus",
+    "repo": null,
     "summary": "Single writer for my personal-data spine. Validates records against JSON Schemas, stores them in SQLite, acknowledges a write only after commit.",
     "labels": [
       "Go",
@@ -119,10 +119,10 @@
   {
     "slug": "kron",
     "name": "Kron",
-    "state": "Public",
+    "state": "Retired",
     "featured": false,
     "url": null,
-    "repo": "https://github.com/knoniewicz/kron",
+    "repo": null,
     "summary": "Go host for sandboxed Lua connectors and automations, triggered by time or by an event, with a run record for every execution.",
     "labels": [
       "Go",

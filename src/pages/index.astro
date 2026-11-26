@@ -22,8 +22,8 @@ const awardUrl = 'https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-prei
 
 const projects = [
   { name: 'SIGI', href: awardUrl, status: 'gold · 2026', line: "Self-hosted AI service assistant that reads the machine's live state over MCP before answering." },
-  { name: 'Bober', href: '/projects/bober/', status: 'daily', line: 'My own coding agent. One Go process, two tools, everything else in Lua.' },
-  { name: 'kor · korpus · kron', href: '/projects/kor/', status: 'open source', line: 'Router, acked-write store and Lua automations. The spine under my home infrastructure.' },
+  { name: 'Bober', href: '/projects/bober/', status: 'daily', line: 'My own agent. One Go process, two tools, everything else in Lua. Also runs my home infrastructure.' },
+  { name: 'kor · korpus · kron', href: '/projects/kor/', status: 'retired', line: 'Router, acked-write store and Lua automations. Ran my home infrastructure until Bober took over.' },
   { name: 'Pularis', href: '/projects/pularis/', status: 'open source', line: 'Polls HTTP APIs and publishes events. Describe a source in one TOML file.' },
   { name: 'Anima', href: '/projects/anima/', status: 'retired', line: 'My old self-hosted platform. Too many services for one person, replaced by Bober.' },
   { name: 'Futura', href: '/projects/futura/', status: '2024', line: 'Diploma project: an end-to-end ML pipeline for next-day stock direction.' },
@@ -44,7 +44,7 @@ const posts = await getPosts();
     <main class="t">
       <h1>Hi, I'm Kacper. I build AI that works with real machines.</h1>
       <p>By day I'm a software developer at Schauer Agrotronic, where the software runs on barn equipment: low-power hardware, serial devices, touch screens in a stable. I built most of <strong>SIGI</strong>, our self-hosted service assistant that reads the machine's live state before answering. It won <a href={awardUrl}>Gold at Agrarfuchs 2026</a>.</p>
-      <p>After work I build the same kind of thing for myself, in Go: a small coding agent I use every day, and a little data spine that runs my home infrastructure. Some of it is <a href="https://github.com/knoniewicz">open source</a>.</p>
+      <p>After work I build the same kind of thing for myself, in Go: a small agent I use every day for code and for running my home infrastructure. Some of what I build is <a href="https://github.com/knoniewicz">open source</a>.</p>
 
       <section class="proj" id="projects">
         <small class="l">projects</small>
