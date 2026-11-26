@@ -2,9 +2,8 @@
 // One-page CV, built from the same data as the rest of the site.
 // scripts/cv-pdf.mjs prints this page to /cv.pdf after every build.
 // Plain reverse-chronological layout, one column, real text, so ATS parsers read it too.
-import { born, skills } from '../lib/profile';
-
-const dob = born.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+// Written for applications in Finland: English, no date of birth or photo, location and relocation stated up front.
+import { skills, yearsWorking, yearsFullTime } from '../lib/profile';
 ---
 
 <!doctype html>
@@ -30,11 +29,11 @@ const dob = born.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit',
           <a href="mailto:kacper@noniewicz.eu">kacper@noniewicz.eu</a><br />
           <a href="https://noniewicz.eu">noniewicz.eu</a> · <a href="https://github.com/knoniewicz">github.com/knoniewicz</a><br />
           <a href="https://www.linkedin.com/in/noniewicz">linkedin.com/in/noniewicz</a><br />
-          Upper Austria · born {dob}
+          Austria · open to relocating to Finland
         </p>
       </header>
 
-      <p class="intro">Software developer at Schauer Agrotronic since 2022, full-time since 2024, working across touch interfaces, backend services and tooling for agricultural machines. HTL graduate in Informatik.</p>
+      <p class="intro">Software developer with {yearsWorking}+ years of professional experience ({yearsFullTime}+ full-time), building touch interfaces, backend services and tooling for agricultural machines. Main stack: TypeScript and Angular at work, Go and Python on my own projects.</p>
 
       <section>
         <h2>Experience</h2>
@@ -58,8 +57,8 @@ const dob = born.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit',
       <section>
         <h2>Education</h2>
         <div class="job">
-          <div class="head"><h3>HTBLA Grieskirchen, Informatik</h3><span>2019 – 2024</span></div>
-          <p>Technical diploma (EQF level 5). Diploma project Futura: my part was the ML pipeline, from technical indicators and feature selection to a LightGBM classifier for next-day stock direction.</p>
+          <div class="head"><h3>HTBLA Grieskirchen, Computer Science</h3><span>2019 – 2024</span></div>
+          <p>Five-year higher technical college (HTL), diploma at EQF level 5. Diploma project Futura: my part was the ML pipeline, from technical indicators and feature selection to a LightGBM classifier for next-day stock direction.</p>
         </div>
       </section>
 
@@ -81,7 +80,7 @@ const dob = born.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit',
 
       <section>
         <h2>Awards</h2>
-        <p>Gold, Innovationspreis Agrarfuchs 2026 (work efficiency and workplace quality), for SIGI<br />2nd place, Accenture Hackathon Vienna 2022</p>
+        <p>Gold, Agrarfuchs 2026, an Austrian agricultural innovation award, for SIGI<br />2nd place, Accenture Hackathon Vienna 2022</p>
       </section>
 
       <section>
