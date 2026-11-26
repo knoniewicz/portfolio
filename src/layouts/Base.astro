@@ -40,18 +40,6 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
   </head>
   <body class="leading-relaxed">
     {home ? <slot /> : <>
-    <header class="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-border-subtle">
-      <div class="max-w-275 mx-auto px-8 max-md:px-5 py-3.5 flex items-center justify-between">
-        <a href="/" class="font-serif text-lg">Kacper Noniewicz</a>
-        <div class="flex items-center gap-8">
-          <nav class="flex gap-5">
-            <a href="/#projects" class="text-sm text-text-muted hover:text-(--color-text) transition-colors">projects</a>
-            <a href="/blog/" class="text-sm text-text-muted hover:text-(--color-text) transition-colors">writing</a>
-            <a href="/#contact" class="text-sm text-text-muted hover:text-(--color-text) transition-colors">contact</a>
-          </nav>
-        </div>
-      </div>
-    </header>
     <div class="max-w-275 mx-auto px-8 max-md:px-5 rise">
       <slot />
     </div>
