@@ -16,7 +16,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const body = `# Kacper Noniewicz
 
-> Software developer at Schauer Agrotronic (Austria), ${age} years old. Builds AI systems that work with real machines: self-hosted LLMs, retrieval over technical documentation, live device data over MCP, and the infrastructure underneath. ${yearsWorking}+ years of professional experience (since 06/2022, part-time alongside school), ${yearsFullTime}+ of them full-time (since 07/2024).
+> Software developer at Schauer Agrotronic (Austria), ${age} years old. Builds touch interfaces, services and tools for agricultural machines (Angular, TypeScript), including the self-hosted AI service assistant SIGI, and his own projects in Go. ${yearsWorking}+ years of professional experience (since 06/2022, part-time alongside school), ${yearsFullTime}+ of them full-time (since 07/2024).
 
 ## Highlights
 
