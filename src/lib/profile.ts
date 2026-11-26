@@ -11,3 +11,11 @@ export function yearsSince(date: Date, now = new Date()) {
 export const age = yearsSince(born);
 export const yearsWorking = yearsSince(startedWork);
 export const yearsFullTime = yearsSince(startedFullTime);
+
+// Shared by the home sidebar and the CV, so both say the same thing.
+export const skills = [
+  ['languages', 'Go, TypeScript, Python, Lua'],
+  ['AI', 'LLMs, RAG, MCP, self-hosted models'],
+  ['web & UI', 'Angular, Node.js, touch-first UIs'],
+  ['systems', 'SQLite, Nix, embedded and serial devices'],
+] as const;
