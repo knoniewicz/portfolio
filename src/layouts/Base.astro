@@ -4,9 +4,10 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  home?: boolean; // the home page brings its own layout, no header bar or footer
 }
 
-const { title = "Software Developer | Industrial Software, AI Infrastructure, Event-Driven Systems", description = "Software Developer. Go, TypeScript, Python." } = Astro.props;
+const { title = "Software Developer | Industrial Software, AI Infrastructure, Event-Driven Systems", description = "Software Developer. Go, TypeScript, Python.", home = false } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
 ---
@@ -33,17 +34,17 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
     <meta name="twitter:image" content={socialImageUrl.toString()} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="Profile for AI assistants" />
     <slot name="head" />
   </head>
   <body class="leading-relaxed">
+    {home ? <slot /> : <>
     <header class="sticky top-0 z-50 bg-bg border-b border-(--color-border)">
       <div class="max-w-275 mx-auto px-8 py-3.5 flex items-center justify-between">
         <a href="/" class="font-mono text-[0.8125rem] font-medium uppercase tracking-[0.08em]">Kacper Noniewicz</a>
         <div class="flex items-center gap-8">
           <nav class="hidden md:flex gap-6">
-            <a href="/#about" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">About</a>
             <a href="/#projects" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Projects</a>
             <a href="/#experience" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Experience</a>
             <a href="/blog/" class="font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-(--color-text) transition-colors">Blog</a>
@@ -60,5 +61,6 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
         <span>&copy; {new Date().getFullYear()} Kacper Noniewicz</span>
       </div>
     </footer>
+    </>}
   </body>
 </html>

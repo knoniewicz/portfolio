@@ -3,15 +3,17 @@
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-serif: "Newsreader", Georgia, serif;
 
-  --color-bg: #0a0a0a;
-  --color-bg-elevated: #111;
-  --color-bg-subtle: #161616;
-  --color-text: #ededec;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted: #71717a;
-  --color-border: #ededec;
-  --color-border-subtle: #222;
+  --color-bg: #141413;
+  --color-bg-elevated: #181817;
+  --color-bg-subtle: #1c1b1a;
+  --color-text: #ecebe6;
+  --color-text-secondary: #a8a69e;
+  --color-text-muted: #7a7972;
+  --color-border: #ecebe6;
+  --color-border-subtle: #2a2927;
+  --color-accent: #e0b15c;
 }
 
 @layer base {
