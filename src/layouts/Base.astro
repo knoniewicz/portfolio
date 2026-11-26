@@ -52,7 +52,7 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
         </div>
       </div>
     </header>
-    <div class="max-w-275 mx-auto px-8 max-md:px-5">
+    <div class="max-w-275 mx-auto px-8 max-md:px-5 rise">
       <slot />
     </div>
     <footer class="border-t border-border-subtle py-6">
@@ -61,5 +61,20 @@ const socialImageUrl = new URL('/kacper.jpg', Astro.site ?? Astro.url);
       </div>
     </footer>
     </>}
+    <script>
+      // Underlines fill from the side the cursor comes in and drain out the side it leaves.
+      document.addEventListener("pointerover", (e) => {
+        const el = (e.target as Element).closest?.(".ul, .post a") as HTMLElement | null;
+        if (!el || el.contains(e.relatedTarget as Node)) return;
+        const r = el.getBoundingClientRect();
+        el.style.backgroundPosition = (e.clientX < r.left + r.width / 2 ? "0" : "100%") + " 100%, 0 100%";
+      });
+      document.addEventListener("pointerout", (e) => {
+        const el = (e.target as Element).closest?.(".ul, .post a") as HTMLElement | null;
+        if (!el || el.contains(e.relatedTarget as Node)) return;
+        const r = el.getBoundingClientRect();
+        el.style.backgroundPosition = (e.clientX < r.left + r.width / 2 ? "0" : "100%") + " 100%, 0 100%";
+      });
+    </script>
   </body>
 </html>
