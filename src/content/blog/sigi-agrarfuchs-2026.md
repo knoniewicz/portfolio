@@ -6,8 +6,8 @@ tags: ["AI", "MCP", "RAG", "Self-hosted", "Industrial software"]
 draft: true
 ---
 
-> **TODO before publishing:** fill in the `TODO(you)` gaps, check with Schauer that the level of
-> detail is fine, then delete this box.
+> **TODO before publishing:** fill in the remaining `TODO(you)` gaps, check with Schauer that the
+> level of detail is fine, then delete this box.
 
 At Agraria Wels 2026, SIGI won **Gold** in the *work efficiency and workplace quality* category of
 the Agrarfuchs innovation award, presented by Agraria together with the Österreichische
@@ -33,17 +33,19 @@ TODO(you): the model and serving stack you are allowed to name, and the hardware
 
 ### Grounded in our documentation
 
-Answers come from retrieval, not from what the model happens to remember. I indexed our
-documentation (TODO(you): manuals, fault code tables, service notes?) and SIGI pulls the relevant
-passages in before it answers, so an answer points at the real procedure for that machine.
+Answers come from retrieval, not from what the model happens to remember. I indexed our machine
+manuals, and SIGI pulls the relevant passages in before it answers, so an answer points at the real
+procedure for that machine.
+
+Customer service reports close the loop: what SIGI stated gets compared with what the service
+report later recorded, and that feedback goes back into the system.
 
 ### Live machine data through MCP
 
-The model talks to the machines through MCP (Model Context Protocol). I wrote the MCP server for
-SDU-X, so the assistant can read live state and fault data from it instead of guessing from a
-description.
-
-TODO(you): one sentence on what SDU-X is, for readers outside Schauer.
+SDU-X is Schauer's barn controller: the touch control unit farmers use to run feeding, littering
+and the other systems in a barn. The model talks to it through MCP (Model Context Protocol). I wrote
+the MCP server for SDU-X, so the assistant reads live state and fault data from the controller
+instead of guessing from a description.
 
 ### One aggregator for every device
 
@@ -58,13 +60,18 @@ I also mentored an intern on the team and helped him build on the aggregator.
 
 - Reads the machine's live state and fault data at the moment someone asks for help.
 - Explains the likely cause and the next check, grounded in our documentation.
-- TODO(you): how farmers or technicians talk to it, and when it hands over to a human.
+- Users talk to it through our internal chatbot, so there is nothing new to install or learn.
 
 ## What I learned
 
-TODO(you): two or three lessons. Good candidates: why live machine state beats a general chatbot;
-what self-hosting cost and what it bought; why one aggregation point made the agent simpler;
-what mentoring taught you about your own design.
+**Clean data from day one decides how good the AI gets.** The model was never the hard part. What
+made SIGI work was data it could actually reach and trust: manuals it could index, controllers it
+could query through one interface, service reports it could learn from. Data that is hard to access
+or messy doesn't get better because there is an AI in front of it; it just produces confident wrong
+answers faster.
+
+If I started again, I would put even more effort into structure and access first, and treat the
+model as the last piece.
 
 ## Results
 
