@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({ site }) => {
 
 ## Highlights
 
-- Main developer of SIGI, Schauer Agrotronic's AI service assistant, which won Gold at Agrarfuchs 2026 (Agraria Wels, work efficiency category). Self-hosted open-weights model, RAG over the machine manuals including their images, an MCP server for the SDU-X controllers, and an MCP aggregator that gives the agent one endpoint for every device. Mentored an intern on the project.
+- Main developer of SIGI, Schauer Agrotronic's AI service assistant, which won Gold at the Innovationspreis Agrarfuchs 2026 (AGRARIA Wels, category work efficiency and workplace quality). Self-hosted open-weights model, RAG over the machine manuals including their images, an MCP server for the SDU-X controllers, and an MCP aggregator that gives the agent one endpoint for every device. Mentored an intern on the project.
 - Led the migration of the company's touch interfaces from legacy Angular to the current stack.
 - Retired Go projects (Nov 2026, replaced by Bober): Kor (TCP message router), Korpus (acknowledged-write store on SQLite), Kron (sandboxed Lua automation host).
 - 2nd place, Accenture Hackathon Vienna 2022.

@@ -10,7 +10,7 @@ draft: true
 > this box.
 
 At Agraria Wels 2026, SIGI won **Gold** in the *work efficiency and workplace quality* category of
-the Agrarfuchs innovation award, presented by Agraria together with the Österreichische
+the Agrarfuchs innovation award, given by Messe Wels together with the Österreichische
 BauernZeitung ([winners](https://agraria.at/neuheiten/agrarfuchs-2026-das-sind-die-preistr-ger)).
 SIGI is Schauer Agrotronic's AI service assistant. It diagnoses faults in barn equipment using
 live data from the machines themselves.
